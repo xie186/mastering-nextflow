@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -149,7 +184,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#schema-will-check-whether-the-files-exist-or-not" id="toc-schema-will-check-whether-the-files-exist-or-not" class="nav-link active" data-scroll-target="#schema-will-check-whether-the-files-exist-or-not"><span class="header-section-number">5.0.1</span> Schema will check whether the files exist or not</a></li>
+  <li><a href="#utilizing" id="toc-utilizing" class="nav-link active" data-scroll-target="#utilizing"><span class="header-section-number">5.1</span> Utilizing</a></li>
+  <li><a href="#schema-will-check-whether-the-files-exist-or-not" id="toc-schema-will-check-whether-the-files-exist-or-not" class="nav-link" data-scroll-target="#schema-will-check-whether-the-files-exist-or-not"><span class="header-section-number">5.2</span> Schema will check whether the files exist or not</a></li>
+  <li><a href="#transform-samplesheet-in-csv-to-structured-nextflow-channell" id="toc-transform-samplesheet-in-csv-to-structured-nextflow-channell" class="nav-link" data-scroll-target="#transform-samplesheet-in-csv-to-structured-nextflow-channell"><span class="header-section-number">5.3</span> Transform samplesheet in CSV to structured NextFlow channell</a></li>
   </ul>
 </nav>
     </div>
@@ -175,16 +212,53 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<pre class="{nextflow}"><code>#| echo: true
-#| eval: false 
-#| code-line-numbers: true
-#| file: nf_example/test_nf_schema_input.nf</code></pre>
+<section id="utilizing" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="utilizing"><span class="header-section-number">5.1</span> Utilizing</h2>
+<p>This Nextflow plugin provides functionality that can be used in a Nextflow pipeline to work with parameter and sample sheet schema. The added functionality is:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>nextflow.enable.dsl <span class="ot">=</span> <span class="dv">2</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="sc">/</span><span class="er">*</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>  Standardize input reads from a samplesheet using nf<span class="sc">-</span>schema helper.</span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a>  Emits<span class="sc">:</span> samples_ch → <span class="fu">tuple</span>(id, meta_map, reads_list)</span>
+<span id="cb1-7"><a href="#cb1-7"></a>          <span class="sc">-</span> id<span class="sc">:</span>     sample <span class="fu">identifier</span> (string)</span>
+<span id="cb1-8"><a href="#cb1-8"></a>          <span class="sc">-</span> meta<span class="sc">:</span>   map including <span class="st">`</span><span class="at">single_end: true|false</span><span class="st">`</span> plus original fields</span>
+<span id="cb1-9"><a href="#cb1-9"></a>          <span class="sc">-</span> reads<span class="sc">:</span>  [read1] <span class="cf">for</span> SE, [read1, read2] <span class="cf">for</span> PE</span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="sc">*</span><span class="er">/</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a></span>
+<span id="cb1-12"><a href="#cb1-12"></a>params {</span>
+<span id="cb1-13"><a href="#cb1-13"></a>    sample_table<span class="sc">:</span> Path <span class="ot">=</span> <span class="st">"test_data/sample_meta_simple.csv"</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>}</span>
+<span id="cb1-15"><a href="#cb1-15"></a></span>
+<span id="cb1-16"><a href="#cb1-16"></a>include { samplesheetToList } from <span class="st">'plugin/nf-schema'</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a></span>
+<span id="cb1-18"><a href="#cb1-18"></a>workflow {</span>
+<span id="cb1-19"><a href="#cb1-19"></a></span>
+<span id="cb1-20"><a href="#cb1-20"></a>    Channel</span>
+<span id="cb1-21"><a href="#cb1-21"></a>        <span class="fu">.fromList</span>(<span class="fu">samplesheetToList</span>(params.sample_table, <span class="st">"${projectDir}/assets/schema_input.json"</span>))</span>
+<span id="cb1-22"><a href="#cb1-22"></a>        .map {</span>
+<span id="cb1-23"><a href="#cb1-23"></a>            meta, read1, read2 <span class="ot">-&gt;</span></span>
+<span id="cb1-24"><a href="#cb1-24"></a>                <span class="cf">if</span> (<span class="sc">!</span>read2) {</span>
+<span id="cb1-25"><a href="#cb1-25"></a>                    return [ meta.id, meta <span class="sc">+</span> [ single_end<span class="sc">:</span>true ], [ read1 ] ]</span>
+<span id="cb1-26"><a href="#cb1-26"></a>                } <span class="cf">else</span> {</span>
+<span id="cb1-27"><a href="#cb1-27"></a>                    return [ meta.id, meta <span class="sc">+</span> [ single_end<span class="sc">:</span>false ], [ read1, read2 ] ]</span>
+<span id="cb1-28"><a href="#cb1-28"></a>                }</span>
+<span id="cb1-29"><a href="#cb1-29"></a>        }</span>
+<span id="cb1-30"><a href="#cb1-30"></a>        .set { samples_ch }</span>
+<span id="cb1-31"><a href="#cb1-31"></a></span>
+<span id="cb1-32"><a href="#cb1-32"></a>    <span class="fu">samples_ch.view</span>()</span>
+<span id="cb1-33"><a href="#cb1-33"></a>    <span class="sc">/</span><span class="er">/</span> Also log the channel <span class="fu">object</span> (structure, not contents)</span>
+<span id="cb1-34"><a href="#cb1-34"></a>    log.info <span class="st">"Sample channel created: ${samples_ch}"</span></span>
+<span id="cb1-35"><a href="#cb1-35"></a>}   </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <pre><code>nextflow run . \
       -main-script nf_example/test_nf_schema_input.nf \
       -c nf_example/test_nf_schema_input.conf </code></pre>
 <pre><code></code></pre>
-<section id="schema-will-check-whether-the-files-exist-or-not" class="level3" data-number="5.0.1">
-<h3 data-number="5.0.1" class="anchored" data-anchor-id="schema-will-check-whether-the-files-exist-or-not"><span class="header-section-number">5.0.1</span> Schema will check whether the files exist or not</h3>
+</section>
+<section id="schema-will-check-whether-the-files-exist-or-not" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="schema-will-check-whether-the-files-exist-or-not"><span class="header-section-number">5.2</span> Schema will check whether the files exist or not</h2>
 <pre><code>nextflow run .  \
      -main-script nf_example/test_nf_schema_input.nf \
      -c nf_example/test_nf_schema_input.conf \
@@ -197,7 +271,7 @@ ul.task-list li input[type="checkbox"] {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>Warning
+<span class="screen-reader-only">Warning</span>Error
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -208,6 +282,75 @@ ul.task-list li input[type="checkbox"] {
 <p>-&gt; Entry 1: Error for field ‘read2’ (/path/to/sample1_fc1_R2.fastq.gz;/path/to/sample1_fc1_R2.fastq.gz): the file or directory ‘/path/to/sample1_fc1_R2.fastq.gz;/path/to/sample1_fc1_R2.fastq.gz’ does not exist (FastQ file for reads 2 cannot contain spaces and must have extension ‘.fq.gz’ or ‘.fastq.gz’) -&gt; Entry 1: Error for field ‘read1’ (/path/to/sample1_fc1_R1.fastq.gz;/path/to/sample1_fc1_R1.fastq.gz): the file or directory ‘/path/to/sample1_fc1_R1.fastq.gz;/path/to/sample1_fc1_R1.fastq.gz’ does not exist (FastQ file for reads 1 must be provided, cannot contain spaces and must have extension ‘.fq.gz’ or ‘.fastq.gz’) -&gt; Entry 2: Error for field ‘read2’ (/path/to/sample2_fc1_R2.fastq.gz;/path/to/sample2_fc1_R2.fastq.gz): the file or directory ‘/path/to/sample2_fc1_R2.fastq.gz;/path/to/sample2_fc1_R2.fastq.gz’ does not exist (FastQ file for reads 2 cannot contain spaces and must have extension ‘.fq.gz’ or ‘.fastq.gz’) -&gt; Entry 2: Error for field ‘read1’ (/path/to/sample2_fc1_R1.fastq.gz;/path/to/sample2_fc1_R1.fastq.gz): the file or directory ‘/path/to/sample2_fc1_R1.fastq.gz;/path/to/sample2_fc1_R1.fastq.gz’ does not exist (FastQ file for reads 1 must be provided, cannot contain spaces and must have extension ‘.fq.gz’ or ‘.fastq.gz’) -&gt; Entry 3: Error for field ‘read2’ (/path/to/sample3_fc1_R2.fastq.gz;/path/to/sample3_fc1_R2.fastq.gz): the file or directory ‘/path/to/sample3_fc1_R2.fastq.gz;/path/to/sample3_fc1_R2.fastq.gz’ does not exist (FastQ file for reads 2 cannot contain spaces and must have extension ‘.fq.gz’ or ‘.fastq.gz’) -&gt; Entry 3: Error for field ‘read1’ (/path/to/sample3_fc1_R1.fastq.gz;/path/to/sample3_fc1_R1.fastq.gz): the file or directory ‘/path/to/sample3_fc1_R1.fastq.gz;/path/to/sample3_fc1_R1.fastq.gz’ does not exist (FastQ file for reads 1 must be provided, cannot contain spaces and must have extension ‘.fq.gz’ or ‘.fastq.gz’)</p>
 </div>
 </div>
+</section>
+<section id="transform-samplesheet-in-csv-to-structured-nextflow-channell" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="transform-samplesheet-in-csv-to-structured-nextflow-channell"><span class="header-section-number">5.3</span> Transform samplesheet in CSV to structured NextFlow channell</h2>
+<p>In the code above, a plain Groovy list is returned.</p>
+<p>The code below uses explicit <code>tuple()</code> constructor - the canonical DSL 2 form, making it unambiguous and self-documenting.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>nextflow.enable.dsl<span class="ot">=</span><span class="dv">2</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="sc">/</span><span class="er">*</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>  Standardize input reads from a samplesheet using nf<span class="sc">-</span>schema helper.</span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a>  Emits<span class="sc">:</span> samples_ch → <span class="fu">tuple</span>(id, meta_map, reads_list)</span>
+<span id="cb5-7"><a href="#cb5-7"></a>          <span class="sc">-</span> id<span class="sc">:</span>     sample <span class="fu">identifier</span> (string)</span>
+<span id="cb5-8"><a href="#cb5-8"></a>          <span class="sc">-</span> meta<span class="sc">:</span>   map including <span class="st">`</span><span class="at">single_end: true|false</span><span class="st">`</span> plus original fields</span>
+<span id="cb5-9"><a href="#cb5-9"></a>          <span class="sc">-</span> reads<span class="sc">:</span>  [read1] <span class="cf">for</span> SE, [read1, read2] <span class="cf">for</span> PE</span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="sc">*</span><span class="er">/</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a></span>
+<span id="cb5-12"><a href="#cb5-12"></a>params.sample_table <span class="ot">=</span> <span class="fu">file</span>(<span class="st">'test_data/sample_meta_simple.csv'</span>)</span>
+<span id="cb5-13"><a href="#cb5-13"></a></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="sc">/</span><span class="er">/</span> Helper that turns a samplesheet into a list of [meta, read1, read2?]</span>
+<span id="cb5-15"><a href="#cb5-15"></a>include { samplesheetToList } from <span class="st">'plugin/nf-schema'</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a></span>
+<span id="cb5-17"><a href="#cb5-17"></a>workflow {</span>
+<span id="cb5-18"><a href="#cb5-18"></a></span>
+<span id="cb5-19"><a href="#cb5-19"></a>  main<span class="sc">:</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a>    Channel</span>
+<span id="cb5-21"><a href="#cb5-21"></a>      <span class="fu">.fromList</span>( <span class="fu">samplesheetToList</span>(params.sample_table, <span class="st">"${projectDir}/assets/schema_input.json"</span>) )</span>
+<span id="cb5-22"><a href="#cb5-22"></a>      .map { meta, read1, read2 <span class="ot">-&gt;</span></span>
+<span id="cb5-23"><a href="#cb5-23"></a>        def isSE <span class="ot">=</span> <span class="sc">!</span>read2</span>
+<span id="cb5-24"><a href="#cb5-24"></a>        <span class="fu">tuple</span>(</span>
+<span id="cb5-25"><a href="#cb5-25"></a>          meta.id as String,</span>
+<span id="cb5-26"><a href="#cb5-26"></a>          meta <span class="sc">+</span> [ single_end<span class="sc">:</span> isSE ],</span>
+<span id="cb5-27"><a href="#cb5-27"></a>          isSE ? [ read1 ] <span class="sc">:</span> [ read1, read2 ]</span>
+<span id="cb5-28"><a href="#cb5-28"></a>        )</span>
+<span id="cb5-29"><a href="#cb5-29"></a>      }</span>
+<span id="cb5-30"><a href="#cb5-30"></a>      .set { samples_ch }</span>
+<span id="cb5-31"><a href="#cb5-31"></a></span>
+<span id="cb5-32"><a href="#cb5-32"></a>    <span class="sc">/</span><span class="er">/</span> Optional<span class="sc">:</span> inspect the standardized tuples during development</span>
+<span id="cb5-33"><a href="#cb5-33"></a>    samples_ch.view { it }</span>
+<span id="cb5-34"><a href="#cb5-34"></a></span>
+<span id="cb5-35"><a href="#cb5-35"></a>    <span class="sc">/</span><span class="er">/</span> Also log the channel <span class="fu">object</span> (structure, not contents)</span>
+<span id="cb5-36"><a href="#cb5-36"></a>    log.info <span class="st">"Sample channel created: ${samples_ch}"</span></span>
+<span id="cb5-37"><a href="#cb5-37"></a>    println <span class="st">"The Groovy object type of 'samples_ch' is: ${samples_ch.getClass()}</span><span class="sc">\n</span><span class="st">"</span></span>
+<span id="cb5-38"><a href="#cb5-38"></a></span>
+<span id="cb5-39"><a href="#cb5-39"></a>    samples_ch.subscribe { item <span class="ot">-&gt;</span></span>
+<span id="cb5-40"><a href="#cb5-40"></a>      println <span class="st">"Type: ${item.getClass()} | Value: ${item}"</span></span>
+<span id="cb5-41"><a href="#cb5-41"></a>    }</span>
+<span id="cb5-42"><a href="#cb5-42"></a></span>
+<span id="cb5-43"><a href="#cb5-43"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This is the standard tuple structure most downstream modules in DSL2 workflows (e.g.&nbsp;nf-core) expect.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">tuple</span>(id, meta_map, reads_list)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Explicit tuples make your workflow compatible with DSL 2 modules, where inputs are declared like:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>input<span class="sc">:</span> </span>
+<span id="cb7-2"><a href="#cb7-2"></a>tuple <span class="fu">val</span>(id), <span class="fu">val</span>(meta), <span class="fu">path</span>(reads)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The code below uses collapses the <code>if/else</code> block into a one-liner ternary operator. The variable <code>isSE</code> stores the boolean.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>def isSE <span class="ot">=</span> <span class="sc">!</span>read2</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">tuple</span>(</span>
+<span id="cb8-3"><a href="#cb8-3"></a>  meta.id as String,</span>
+<span id="cb8-4"><a href="#cb8-4"></a>  meta <span class="sc">+</span> [ single_end<span class="sc">:</span> isSE ],</span>
+<span id="cb8-5"><a href="#cb8-5"></a>  isSE ? [ read1 ] <span class="sc">:</span> [ read1, read2 ]</span>
+<span id="cb8-6"><a href="#cb8-6"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This style makes your mapping functional and side-effect-free, which aligns better with how Nextflow channels are transformed. It’s also easier to maintain if you later expand the tuple (e.g., add another metadata field).</p>
 
 
 </section>
