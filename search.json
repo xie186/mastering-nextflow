@@ -1,0 +1,32 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "DNA Methylation Analysis with Nextflow",
+    "section": "",
+    "text": "1 Intro\nLearn how to read a comma-separated sample metadata file containing semicolon-separated FASTQ file lists, and inspect parsed outputs using channels in Nextflow DSL2.\nChannel.fromPath(params.metatab) .splitCsv(header:true, sep:‘,’)",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Intro</span>"
+    ]
+  },
+  {
+    "objectID": "02-methods.html",
+    "href": "02-methods.html",
+    "title": "3  Test 2",
+    "section": "",
+    "text": "Test 2",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Test 2</span>"
+    ]
+  },
+  {
+    "objectID": "03-results.html",
+    "href": "03-results.html",
+    "title": "4  Test 3",
+    "section": "",
+    "text": "Test3",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Test 3</span>"
+    ]
+  }
+]
