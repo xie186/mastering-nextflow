@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4&nbsp; Test 3 – Mastering Nextflow: From Fundamentals to Expert Practice</title>
+<title>5&nbsp; Test 3 – Mastering Nextflow: From Fundamentals to Expert Practice</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +65,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./04-advanced_metadata.html" rel="next">
-<link href="./02-methods.html" rel="prev">
+<link href="./03-results.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -83,7 +117,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-results.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Test 3</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-advanced_metadata.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Test 3</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -130,13 +164,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-results.html" class="sidebar-item-text sidebar-link active">
+  <a href="./03-results.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Test 3</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-advanced_metadata.html" class="sidebar-item-text sidebar-link">
+  <a href="./04-advanced_metadata.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Test 3</span></span></a>
   </div>
 </li>
@@ -145,15 +179,21 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#schema-will-check-whether-the-files-exist-or-not" id="toc-schema-will-check-whether-the-files-exist-or-not" class="nav-link active" data-scroll-target="#schema-will-check-whether-the-files-exist-or-not"><span class="header-section-number">5.0.1</span> Schema will check whether the files exist or not</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Test 3</span></h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Test 3</span></h1>
 </div>
 
 
@@ -170,9 +210,73 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Test3</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>nextflow.enable.dsl <span class="ot">=</span> <span class="dv">2</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>params {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    sample_table       <span class="ot">=</span> <span class="st">"test_data/sample_meta_simple.csv"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>include { samplesheetToList         } from <span class="st">'plugin/nf-schema'</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>workflow {</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    Channel</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">.fromList</span>(<span class="fu">samplesheetToList</span>(params.sample_table, <span class="st">"${projectDir}/assets/schema_input.json"</span>))</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        .map {</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>            meta, read1, read2, genome <span class="ot">-&gt;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> (<span class="sc">!</span>read2) {</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>                    return [ meta.id, meta <span class="sc">+</span> [ single_end<span class="sc">:</span>true ], [ read1 ] ]</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>                } <span class="cf">else</span> {</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>                    return [ meta.id, meta <span class="sc">+</span> [ single_end<span class="sc">:</span>false ], [ read1, read2 ] ]</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>                }</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        .set { samples_ch }</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="sc">/</span><span class="er">/</span> <span class="fu">Channel.fromPath</span>(params.metatab)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="sc">/</span><span class="er">/</span>     <span class="fu">.splitCsv</span>(header<span class="sc">:</span>true, sep<span class="sc">:</span><span class="st">','</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="sc">/</span><span class="er">/</span>     .map { row <span class="ot">-&gt;</span> </span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="er">//</span>         def read1_list <span class="ot">=</span> <span class="fu">row.read1.split</span>(<span class="st">';'</span>).collect { <span class="fu">it.trim</span>() }</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="sc">/</span><span class="er">/</span>         def read2_list <span class="ot">=</span> <span class="fu">row.read2.split</span>(<span class="st">';'</span>).collect { <span class="fu">it.trim</span>() }</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="sc">/</span><span class="er">/</span>         return [row.sample_id, read1_list, read2_list]</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="sc">/</span><span class="er">/</span>     }</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="sc">/</span><span class="er">/</span>     .set { samples_ch }</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">samples_ch.view</span>()</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>}   </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<pre><code>nextflow run . \
+      -main-script nf_example/test_nf_schema_input.nf \
+      -c nf_example/test_nf_schema_input.conf </code></pre>
+<pre><code></code></pre>
+<section id="schema-will-check-whether-the-files-exist-or-not" class="level3" data-number="5.0.1">
+<h3 data-number="5.0.1" class="anchored" data-anchor-id="schema-will-check-whether-the-files-exist-or-not"><span class="header-section-number">5.0.1</span> Schema will check whether the files exist or not</h3>
+<pre><code>nextflow run .  \
+     -main-script nf_example/test_nf_schema_input.nf \
+     -c nf_example/test_nf_schema_input.conf \
+     --sample_table test_data/sample_meta_FileNotExist.csv </code></pre>
+<p>With the schema setting, the files specified in <code>read1</code> and <code>read2</code> fields have to exist.</p>
+<p>If not, the error message below will be shown:</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>N E X T F L O W ~ version 25.10.0</p>
+<p>Launching <code>nf_example/test_nf_schema_input.nf</code> [romantic_gutenberg] DSL2 - revision: eb82818f4d</p>
+<p>ERROR ~ Validation of samplesheet failed!</p>
+<p>– Check ‘.nextflow.log’ file for details The following errors have been detected in /mnt/ccrsf-static/Analysis/xies4/github_repos/nextflow_note/test_data/sample_meta_FileNotExist.csv:</p>
+<p>-&gt; Entry 1: Error for field ‘read2’ (/path/to/sample1_fc1_R2.fastq.gz;/path/to/sample1_fc1_R2.fastq.gz): the file or directory ‘/path/to/sample1_fc1_R2.fastq.gz;/path/to/sample1_fc1_R2.fastq.gz’ does not exist (FastQ file for reads 2 cannot contain spaces and must have extension ‘.fq.gz’ or ‘.fastq.gz’) -&gt; Entry 1: Error for field ‘read1’ (/path/to/sample1_fc1_R1.fastq.gz;/path/to/sample1_fc1_R1.fastq.gz): the file or directory ‘/path/to/sample1_fc1_R1.fastq.gz;/path/to/sample1_fc1_R1.fastq.gz’ does not exist (FastQ file for reads 1 must be provided, cannot contain spaces and must have extension ‘.fq.gz’ or ‘.fastq.gz’) -&gt; Entry 2: Error for field ‘read2’ (/path/to/sample2_fc1_R2.fastq.gz;/path/to/sample2_fc1_R2.fastq.gz): the file or directory ‘/path/to/sample2_fc1_R2.fastq.gz;/path/to/sample2_fc1_R2.fastq.gz’ does not exist (FastQ file for reads 2 cannot contain spaces and must have extension ‘.fq.gz’ or ‘.fastq.gz’) -&gt; Entry 2: Error for field ‘read1’ (/path/to/sample2_fc1_R1.fastq.gz;/path/to/sample2_fc1_R1.fastq.gz): the file or directory ‘/path/to/sample2_fc1_R1.fastq.gz;/path/to/sample2_fc1_R1.fastq.gz’ does not exist (FastQ file for reads 1 must be provided, cannot contain spaces and must have extension ‘.fq.gz’ or ‘.fastq.gz’) -&gt; Entry 3: Error for field ‘read2’ (/path/to/sample3_fc1_R2.fastq.gz;/path/to/sample3_fc1_R2.fastq.gz): the file or directory ‘/path/to/sample3_fc1_R2.fastq.gz;/path/to/sample3_fc1_R2.fastq.gz’ does not exist (FastQ file for reads 2 cannot contain spaces and must have extension ‘.fq.gz’ or ‘.fastq.gz’) -&gt; Entry 3: Error for field ‘read1’ (/path/to/sample3_fc1_R1.fastq.gz;/path/to/sample3_fc1_R1.fastq.gz): the file or directory ‘/path/to/sample3_fc1_R1.fastq.gz;/path/to/sample3_fc1_R1.fastq.gz’ does not exist (FastQ file for reads 1 must be provided, cannot contain spaces and must have extension ‘.fq.gz’ or ‘.fastq.gz’)</p>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -577,14 +681,11 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./02-methods.html" class="pagination-link" aria-label="Test 2">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Test 2</span></span>
+      <a href="./03-results.html" class="pagination-link" aria-label="Test 3">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Test 3</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./04-advanced_metadata.html" class="pagination-link" aria-label="Test 3">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Test 3</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

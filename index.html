@@ -8,7 +8,7 @@
 
 <meta name="author" content="Shaojun Xie">
 
-<title>DNA Methylation Analysis with Nextflow</title>
+<title>Mastering Nextflow: From Fundamentals to Expert Practice</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -100,7 +100,7 @@ ul.task-list li input[type="checkbox"] {
       <a href="./index.html" class="sidebar-logo-link">
       </a>
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">DNA Methylation Analysis with Nextflow</a> 
+      <a href="./">Mastering Nextflow: From Fundamentals to Expert Practice</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -134,6 +134,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Test 3</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-advanced_metadata.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Test 3</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -144,7 +150,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#intro" id="toc-intro" class="nav-link active" data-scroll-target="#intro"><span class="header-section-number">1</span> Intro</a></li>
+  <li><a href="#intro" id="toc-intro" class="nav-link active" data-scroll-target="#intro"><span class="header-section-number">1</span> Intro</a>
+  <ul class="collapse">
+  <li><a href="#or-from-pifont-package-star-this-repository" id="toc-or-from-pifont-package-star-this-repository" class="nav-link" data-scroll-target="#or-from-pifont-package-star-this-repository"><span class="header-section-number">1.1</span> or (from <code>pifont</code> package) Star This Repository</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -153,7 +162,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">DNA Methylation Analysis with Nextflow</h1>
+<h1 class="title">Mastering Nextflow: From Fundamentals to Expert Practice</h1>
 </div>
 
 
@@ -179,9 +188,21 @@ ul.task-list li input[type="checkbox"] {
 <section id="intro" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Intro</h1>
 <p>Learn how to read a comma-separated sample metadata file containing semicolon-separated FASTQ file lists, and inspect parsed outputs using channels in Nextflow DSL2.</p>
+<section id="or-from-pifont-package-star-this-repository" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="or-from-pifont-package-star-this-repository"><span class="header-section-number">1.1</span> or (from <code>pifont</code> package) Star This Repository</h2>
+<p>If you find this Nextflow tutorial helpful, please consider starring the repository on GitHub! Your support helps others discover this resource and motivates continued development.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://github.com/xies4/nextflow_note"><img src="https://img.shields.io/github/stars/xies4/nextflow_note?style=social&amp;label=Star.png" class="img-fluid figure-img"></a></p>
+<figcaption>GitHub stars</figcaption>
+</figure>
+</div>
+<p><a href="https://github.com/xies4/nextflow_note"> or (from <code>pifont</code> package) <strong>Star on GitHub</strong> →</a></p>
+<hr>
 <p>Channel.fromPath(params.metatab) .splitCsv(header:true, sep:‘,’)</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
