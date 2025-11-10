@@ -20,6 +20,7 @@ format:
   pdf:
     toc: true
     number-sections: true
+    mainfont: DejaVu Sans
 
 publish:
   on: gh-pages
