@@ -4,17 +4,7 @@
     "href": "index.html",
     "title": "Mastering Nextflow: From Fundamentals to Expert Practice",
     "section": "",
-    "text": "1 Intro\nLearn how to read a comma-separated sample metadata file containing semicolon-separated FASTQ file lists, and inspect parsed outputs using channels in Nextflow DSL2.",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Intro</span>"
-    ]
-  },
-  {
-    "objectID": "index.html#or-from-pifont-package-star-this-repository",
-    "href": "index.html#or-from-pifont-package-star-this-repository",
-    "title": "Mastering Nextflow: From Fundamentals to Expert Practice",
-    "section": "1.1 or (from pifont package) Star This Repository",
-    "text": "1.1 or (from pifont package) Star This Repository\nIf you find this Nextflow tutorial helpful, please consider starring the repository on GitHub! Your support helps others discover this resource and motivates continued development.\n\n\n\nGitHub stars\n\n\n or (from pifont package) Star on GitHub →\n\nChannel.fromPath(params.metatab) .splitCsv(header:true, sep:‘,’)",
+    "text": "1 Intro\nLearn how to read a comma-separated sample metadata file containing semicolon-separated FASTQ file lists, and inspect parsed outputs using channels in Nextflow DSL2.\n##\nIf you find this Nextflow tutorial helpful, please consider starring the repository on GitHub! Your support helps others discover this resource and motivates continued development.\n\n\n\nGitHub stars\n\n\n\n\nChannel.fromPath(params.metatab) .splitCsv(header:true, sep:‘,’)",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Intro</span>"
     ]
