@@ -56,3 +56,6 @@ gh-pages/
 
 .nextflow/
 .nextflow.log.*
+/.quarto/
+
+*.ipynb
