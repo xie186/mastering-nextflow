@@ -17,10 +17,10 @@ format:
     theme: cosmo
     toc: true
     number-sections: true
-  # pdf:
-  #   toc: true
-  #   number-sections: true
-  #   include-in-header: preamble.tex
+  pdf:
+    toc: true
+    number-sections: true
+    include-in-header: preamble.tex
     
 
 publish:
