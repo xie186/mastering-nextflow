@@ -20,7 +20,7 @@ format:
   pdf:
     toc: true
     number-sections: true
-    include-in-header: preamble.tex
+    #include-in-header: preamble.tex
     
 
 publish:
