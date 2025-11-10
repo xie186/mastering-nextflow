@@ -8,3 +8,25 @@
 #| eval: false 
 #| file: nf_example/test_nf_schema_input.nf
 ```
+
+
+```
+nextflow run . \
+      -main-script nf_example/test_nf_schema_input.nf \
+      -c nf_example/test_nf_schema_input.conf 
+```
+
+
+```
+
+```
+
+With the schema setting, the files specified in `read1` and `read2` fields have to exist. 
+
+If not, the error message below will be shown: 
+
+::: {.callout-warning}
+## Warning
+
+-> Entry 1: Error for field 'read2' (/path/to/sample1_fc1_R2.fastq.gz;/path/to/sample1_fc1_R2.fastq.gz): the file or directory '/path/to/sample1_fc1_R2.fastq.gz;/path/to/sample1_fc1_R2.fastq.gz' does not exist (FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz')
+:::
