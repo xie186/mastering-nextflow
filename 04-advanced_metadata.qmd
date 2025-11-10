@@ -3,9 +3,10 @@
 
 
 
-```{r}
+```{nextflow}
 #| echo: true
 #| eval: false 
+#| code-line-numbers: true
 #| file: nf_example/test_nf_schema_input.nf
 ```
 
