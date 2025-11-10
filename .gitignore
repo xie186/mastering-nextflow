@@ -59,3 +59,4 @@ gh-pages/
 /.quarto/
 
 *.ipynb
+renv/
