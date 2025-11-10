@@ -2,13 +2,13 @@
 
 Learn how to read a comma-separated sample metadata file containing semicolon-separated FASTQ file lists, and inspect parsed outputs using channels in Nextflow DSL2.
 
-## ⭐ Star This Repository
+## \textbf{*} or \ding{72} (from `pifont` package) Star This Repository
 
 If you find this Nextflow tutorial helpful, please consider starring the repository on GitHub! Your support helps others discover this resource and motivates continued development.
 
 [![GitHub stars](https://img.shields.io/github/stars/xies4/nextflow_note?style=social&label=Star)](https://github.com/xies4/nextflow_note)
 
-[⭐ **Star on GitHub** →](https://github.com/xies4/nextflow_note)
+[\textbf{*} or \ding{72} (from `pifont` package) **Star on GitHub** →](https://github.com/xies4/nextflow_note)
 
 ---
 

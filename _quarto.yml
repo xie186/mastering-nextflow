@@ -20,7 +20,8 @@ format:
   pdf:
     toc: true
     number-sections: true
-    mainfont: DejaVu Sans
+    include-in-header: preamble.tex
+    
 
 publish:
   on: gh-pages
