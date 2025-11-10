@@ -1,10 +1,24 @@
 project:
-  title: "nextflow_note"
+  type: book
+  output-dir: _book
 
+book:
+  title: "DNA Methylation Analysis with Nextflow"
+  author: "Shaojun Xie"
+  chapters:
+    - index.qmd
+    - 01-introduction.qmd
+    - 02-methods.qmd
+    - 03-results.qmd
 
+format:
+  html:
+    theme: cosmo
+    toc: true
+    number-sections: true
+  pdf:
+    toc: true
+    number-sections: true
 
-
-# Add this section
 publish:
-  on:
-    gh-pages
+  on: gh-pages
