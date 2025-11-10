@@ -44,15 +44,6 @@ jobs:
 
       - name: Restore R environment with renv
         uses: r-lib/actions/setup-renv@v2
-      
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update -y
-          sudo apt-get install -y \
-            libcurl4-openssl-dev libssl-dev libxml2-dev \
-            libharfbuzz-dev libfribidi-dev libfreetype6-dev \
-            libpng-dev libtiff5-dev libjpeg-dev \
-            fonts-dejavu
 
 
       # From https://github.com/julia-actions/setup-julia
