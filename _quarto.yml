@@ -10,7 +10,7 @@ book:
     - 01-introduction.qmd
     - 02-methods.qmd
     - 03-results.qmd
-    - 03-advanced_metadata.qmd
+    - 04-advanced_metadata.qmd
 
 format:
   html:

@@ -21,6 +21,16 @@ nextflow run . \
 
 ```
 
+
+
+### Schema will check whether the files exist or not
+
+```
+nextflow run .  \
+     -main-script nf_example/test_nf_schema_input.nf \
+     -c nf_example/test_nf_schema_input.conf \
+     --sample_table test_data/sample_meta_FileNotExist.csv 
+```
 With the schema setting, the files specified in `read1` and `read2` fields have to exist. 
 
 If not, the error message below will be shown: 
@@ -28,5 +38,23 @@ If not, the error message below will be shown:
 ::: {.callout-warning}
 ## Warning
 
+ N E X T F L O W   ~  version 25.10.0
+
+Launching `nf_example/test_nf_schema_input.nf` [romantic_gutenberg] DSL2 - revision: eb82818f4d
+
+ERROR ~ Validation of samplesheet failed!
+
+ -- Check '.nextflow.log' file for details
+The following errors have been detected in /mnt/ccrsf-static/Analysis/xies4/github_repos/nextflow_note/test_data/sample_meta_FileNotExist.csv:
+
 -> Entry 1: Error for field 'read2' (/path/to/sample1_fc1_R2.fastq.gz;/path/to/sample1_fc1_R2.fastq.gz): the file or directory '/path/to/sample1_fc1_R2.fastq.gz;/path/to/sample1_fc1_R2.fastq.gz' does not exist (FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz')
+-> Entry 1: Error for field 'read1' (/path/to/sample1_fc1_R1.fastq.gz;/path/to/sample1_fc1_R1.fastq.gz): the file or directory '/path/to/sample1_fc1_R1.fastq.gz;/path/to/sample1_fc1_R1.fastq.gz' does not exist (FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz')
+-> Entry 2: Error for field 'read2' (/path/to/sample2_fc1_R2.fastq.gz;/path/to/sample2_fc1_R2.fastq.gz): the file or directory '/path/to/sample2_fc1_R2.fastq.gz;/path/to/sample2_fc1_R2.fastq.gz' does not exist (FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz')
+-> Entry 2: Error for field 'read1' (/path/to/sample2_fc1_R1.fastq.gz;/path/to/sample2_fc1_R1.fastq.gz): the file or directory '/path/to/sample2_fc1_R1.fastq.gz;/path/to/sample2_fc1_R1.fastq.gz' does not exist (FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz')
+-> Entry 3: Error for field 'read2' (/path/to/sample3_fc1_R2.fastq.gz;/path/to/sample3_fc1_R2.fastq.gz): the file or directory '/path/to/sample3_fc1_R2.fastq.gz;/path/to/sample3_fc1_R2.fastq.gz' does not exist (FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz')
+-> Entry 3: Error for field 'read1' (/path/to/sample3_fc1_R1.fastq.gz;/path/to/sample3_fc1_R1.fastq.gz): the file or directory '/path/to/sample3_fc1_R1.fastq.gz;/path/to/sample3_fc1_R1.fastq.gz' does not exist (FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz')
 :::
+
+
+
+
