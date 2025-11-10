@@ -6,7 +6,7 @@ Learn how to read a comma-separated sample metadata file containing semicolon-se
 
 If you find this Nextflow tutorial helpful, please consider starring the repository on GitHub! Your support helps others discover this resource and motivates continued development.
 
-[![GitHub stars](https://img.shields.io/github/stars/xie186/mastering-nextflow?style=social&label=Star)](https://github.com/xie186/mastering-nextflow/stargazers)
+[![GitHub stars](https://img.shields.io/github/stars/xie186/mastering-nextflow)](https://github.com/xie186/mastering-nextflow/stargazers)
 
 
 [ **Star on GitHub** →](https://github.com/xie186/mastering-nextflow/)

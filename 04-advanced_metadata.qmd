@@ -91,7 +91,7 @@ input:
 tuple val(id), val(meta), path(reads)
 ```
 
-The code below uses collapses the `if/else` block into a one-liner ternary operator. The variable `isSE` stores the boolean. 
+The code below collapses the `if/else` block into a one-liner ternary operator. The variable `isSE` stores the boolean. 
 
 ```{r}
 #| echo: true
