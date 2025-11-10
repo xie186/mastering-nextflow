@@ -16,20 +16,17 @@ This Nextflow plugin provides functionality that can be used in a Nextflow pipel
 ```
 
 
-```
+```{bash}
+#| eval: false
 nextflow run . \
       -main-script nf_example/test_nf_schema_input.nf \
       -c nf_example/test_nf_schema_input.conf 
 ```
 
-
-```
-
-```
-
 ## Schema will check whether the files exist or not
 
-```
+```{bash}
+#| eval: false
 nextflow run .  \
      -main-script nf_example/test_nf_schema_input.nf \
      -c nf_example/test_nf_schema_input.conf \
