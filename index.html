@@ -150,7 +150,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#intro" id="toc-intro" class="nav-link active" data-scroll-target="#intro"><span class="header-section-number">1</span> Intro</a></li>
+  <li><a href="#intro" id="toc-intro" class="nav-link active" data-scroll-target="#intro"><span class="header-section-number">1</span> Intro</a>
+  <ul class="collapse">
+  <li><a href="#star-this-repository" id="toc-star-this-repository" class="nav-link" data-scroll-target="#star-this-repository"><span class="header-section-number">1.1</span> Star This Repository</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -185,19 +188,21 @@ ul.task-list li input[type="checkbox"] {
 <section id="intro" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Intro</h1>
 <p>Learn how to read a comma-separated sample metadata file containing semicolon-separated FASTQ file lists, and inspect parsed outputs using channels in Nextflow DSL2.</p>
-##
+<section id="star-this-repository" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="star-this-repository"><span class="header-section-number">1.1</span> Star This Repository</h2>
 <p>If you find this Nextflow tutorial helpful, please consider starring the repository on GitHub! Your support helps others discover this resource and motivates continued development.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://github.com/xies4/nextflow_note"><img src="https://img.shields.io/github/stars/xies4/nextflow_note?style=social&amp;label=Star.png" class="img-fluid figure-img"></a></p>
+<p><a href="https://github.com/xie186/nextflow_note"><img src="https://img.shields.io/github/stars/xies4/nextflow_note?style=social&amp;label=Star.png" class="img-fluid figure-img"></a></p>
 <figcaption>GitHub stars</figcaption>
 </figure>
 </div>
-<p><a href="https://github.com/xies4/nextflow_note"></a></p>
+<p><a href="https://github.com/xie186/nextflow_note"><strong>Star on GitHub</strong> →</a></p>
 <hr>
 <p>Channel.fromPath(params.metatab) .splitCsv(header:true, sep:‘,’)</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
