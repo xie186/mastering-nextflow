@@ -1,7 +1,4 @@
-# Test 3
-
-
-
+# Validating Input with `nf-schema`
 
 ## Utilizing  
 
