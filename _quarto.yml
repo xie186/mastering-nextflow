@@ -6,11 +6,22 @@ book:
   title: "Mastering Nextflow: From Fundamentals to Expert Practice"
   author: "Shaojun Xie"
   chapters:
-    - index.qmd
-    - 01-introduction.qmd
-    - 02-methods.qmd
-    - 03-results.qmd
-    - 04-advanced_metadata.qmd
+  - index.qmd
+  - preface.qmd
+  - introduction.qmd
+
+  - part: Foundations
+    chapters: 
+      - workflow_overview.qmd
+      - DSL2.qmd
+
+  - part: Building Real Pipelines
+    chapters:
+      - 03-results.qmd
+  
+  - part: Advanced Topics
+    chapters:
+      - 04-advanced_metadata.qmd
 
 format:
   html:
