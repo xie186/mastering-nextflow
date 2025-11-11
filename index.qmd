@@ -9,7 +9,7 @@ If you find this Nextflow tutorial helpful, please consider starring the reposit
 [![GitHub stars](https://img.shields.io/github/stars/xie186/mastering-nextflow)](https://github.com/xie186/mastering-nextflow/stargazers)
 
 
-[ **Star on GitHub** →](https://github.com/xie186/mastering-nextflow/)
+[ **Star on GitHub** →](https://github.com/xie186/mastering-nextflow/)![]((https://github.com/xie186/mastering-nextflow/stargazers))
 
 ---
 
