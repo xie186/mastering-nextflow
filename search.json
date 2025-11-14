@@ -56,7 +56,7 @@
     "href": "DSL2.html",
     "title": "6  DSL2",
     "section": "",
-    "text": "To be added.",
+    "text": "6.1 Modules\nA module is a Nextflow script containing one or more process definitions that can be imported from another Nextflow script.\nA process can be invoked as a function in the workflow scope, passing the expected input channels as parameters as it if were a custom function.\nprocess bar {\n    input:\n      path x\n    output:\n      path 'bar.txt'\n    script:\n      \"\"\"\n      your_command $x &gt; bar.txt\n      \"\"\"\n}\n\nworkflow {\n    data = channel.fromPath('/some/path/*.txt')\n    bar(data)\n}\nReference https://icbi-lab.github.io/current-topics-bioinformatics-lecture/07_nextflow_dsl2.html#7\nModule components can be imported using the include keyword.\ninclude { foo } from './some/module'\n\nworkflow {\n    data = channel.fromPath('/some/data/*.txt')\n    foo(data)\n}\nMultiple inclusion\ninclude { foo; bar } from './some/module'\n\nworkflow {\n    data = channel.fromPath('/some/data/*.txt')\n    foo(data)\n    bar(data)\n}",
     "crumbs": [
       "Foundations",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>DSL2</span>"
