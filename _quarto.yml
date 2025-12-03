@@ -12,31 +12,31 @@ book:
 
   - part: Analysis of WGBS data
     chapters:
-      - wgb_analysis.qmd
+      - nf_wgb_analysis.qmd
 
   - part: Getting Started with Nextflow
     chapters:
-      - installation.qmd
-      - your_first_pipeline.qmd
+      - nf_installation.qmd
+      - nf_your_first_pipeline.qmd
 
   - part: Running Nextflow workflows
     chapters:
-      - configuration.qmd
+      - nf_configuration.qmd
 
   - part: Foundations
     chapters: 
-      - workflow_overview.qmd
-      - channels_processes.qmd
-      - DSL2.qmd
-      - workflow.qmd
+      - nf_workflow_overview.qmd
+      - nf_channels_processes.qmd
+      - nf_DSL2.qmd
+      - nf_workflow.qmd
 
   - part: Building Real Pipelines
     chapters:
-      - 03-results.qmd
-  
+      - nf_results.qmd
+
   - part: Advanced Topics
     chapters:
-      - 04-advanced_metadata.qmd
+      - nf_advanced_metadata.qmd
 
 format:
   html:
