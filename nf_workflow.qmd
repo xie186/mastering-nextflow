@@ -1,0 +1,27 @@
+# Workflows in Nextflow
+
+In Nextflow, a **workflow** is a high-level construct that orchestrates the execution of multiple processes and sub-workflows. It defines the overall structure and flow of data through the various components of your pipeline. 
+
+
+
+## Workflow output
+
+
+
+
+
+```{r}
+#| echo: true
+#| eval: false 
+#| code-line-numbers: true
+#| file: nf_example/test_output_block.nf
+```
+
+
+```{bash}
+#| eval: false
+nextflow run . \
+  -main-script nf_example/test_output_block.nf \
+  --meta test_data/sample_meta_sra.csv
+```
+

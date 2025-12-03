@@ -1,0 +1,170 @@
+# DSL2
+
+
+## Modules 
+
+A module is a Nextflow script containing one or more process definitions that can be imported from another Nextflow script.
+
+A process can be invoked as a function in the workflow scope, passing the expected input channels as parameters as it if were a custom function.
+
+```{r}
+#| echo: true
+#| eval: false
+process bar {
+    input:
+      path x
+    output:
+      path 'bar.txt'
+    script:
+      """
+      your_command $x > bar.txt
+      """
+}
+
+workflow {
+    data = channel.fromPath('/some/path/*.txt')
+    bar(data)
+}
+```
+
+Reference 
+https://icbi-lab.github.io/current-topics-bioinformatics-lecture/07_nextflow_dsl2.html#7
+
+
+Module components can be imported using the include keyword.
+
+```{r}
+#| echo: true
+#| eval: false
+include { foo } from './some/module'
+
+workflow {
+    data = channel.fromPath('/some/data/*.txt')
+    foo(data)
+}
+```
+
+
+Multiple inclusion
+
+
+```{r}
+#| echo: true
+#| eval: false
+include { foo; bar } from './some/module'
+
+workflow {
+    data = channel.fromPath('/some/data/*.txt')
+    foo(data)
+    bar(data)
+}
+```
+
+
+
+Process outputs can either be assigned to a variable or accessed using the implicit `.out` attribute
+
+
+
+```{r}
+#| echo: true
+#| eval: false
+include { INDEX; FASTQC; QUANT; MULTIQC } from './module/script.nf' 
+
+read_pairs_ch = channel.fromFilePairs( params.reads)
+
+workflow {
+  INDEX( params.transcriptome )
+  FASTQC( read_pairs_ch )
+  QUANT( INDEX.out, read_pairs_ch )
+  MULTIQC( QUANT.out.mix(FASTQC.out).collect(), multiqc_file )
+}
+```
+
+Note: channels may now be used as inputs multiple times without the need to duplicate them
+
+use the *emit* option to define a name identifier that can be used to reference the channel in the external scope.
+
+
+```{r}
+#| echo: true
+#| eval: false
+process foo {
+  output:
+    path '*.bam', emit: samples_bam
+
+  '''
+  your_command --here
+  '''
+}
+
+workflow {
+    foo()
+    foo.out.samples_bam.view()
+}
+```
+
+
+… inclusion and invocation of components with the same name from different modules
+
+
+```{r}
+#| echo: true
+#| eval: false
+include { foo } from './some/module'
+include { foo as bar } from './other/module'
+
+workflow {
+    foo(some_data)
+    bar(other_data)
+}
+```
+
+… inclusion and the invocation of the same component multiple times
+
+
+````{r}
+#| echo: true
+#| eval: false
+include { foo as foo_a; foo as foo_b } from './some/module'
+
+workflow {
+    foo_a(some_data)
+    foo_b(other_data)
+}
+```
+
+
+## Parameters
+
+### Parameter block
+
+Since Nextflow 25.10.0, you can define parameters in a dedicated `params` block.
+
+To enable this feature, set the environment variable `NXF_SYNTAX_PARSER` to `v2` before running Nextflow:
+
+```{sh}
+#| echo: true
+#| eval: false
+export NXF_SYNTAX_PARSER=v2
+```
+
+Define one or more parameters in the module
+
+```{r}
+#| echo: true
+#| eval: false
+params.foo = 'Hello'
+params.bar = 'world!'
+
+def sayHello() {
+    println "$params.foo $params.bar"
+}
+
+
+## sub-workflows
+
+## workflow
+
+Workflows defined in your script or imported by a module inclusion can be invoked and composed as any other process in your application.
+

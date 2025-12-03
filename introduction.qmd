@@ -3,3 +3,14 @@
 
 
 
+## The `process` and `workflow` constructs
+
+
+
+
+In NextFlow, a `process` construct defines a computational step that can be executed in isolation. Each process has its own input and output channels, allowing for flexible data flow between different steps in a workflow. Processes can be run in parallel, making it easy to scale up analyses across multiple compute nodes.
+
+
+A `workflow` construct, on the other hand, is used to define the overall structure of a NextFlow script. It specifies how processes are connected and the order in which they are executed. Workflows can include conditional logic, loops, and other control structures to manage complex data processing pipelines.
+
+

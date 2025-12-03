@@ -17,3 +17,29 @@ Channel.fromPath(params.metatab)
     .splitCsv(header:true, sep:',')
 
 
+
+* Make Bioinformatics Analyses more reproducible
+* Automate complex workflows 
+* Scale analyses across multiple compute nodes
+* Make it easier to run the same ccode across different computing platforms
+
+Why is it imprortant to modularize your workflow code?
+
+YOu can reuse the same modules in multiple workflows without rewriting code.
+It makes code maintanace easier 
+
+It can make code more readable by breaking it into smaller, manageable pieces.
+
+
+
+Can you control the name of the task directories created at runtime under work/?
+
+
+
+Is there a logic for why some arguments use a single dash (-resume) and some use a double dash (--input)? 
+
+Single-dash options (-X) are built-in Nextflow runtime flags
+
+Double-dash options (--param value) are pipeline parameters
+
+Does it matter in what order you write inputs in a process call? 

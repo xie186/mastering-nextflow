@@ -10,6 +10,19 @@ book:
   - preface.qmd
   - introduction.qmd
 
+  - part: Analysis of WGBS data
+    chapters:
+      - wgb_analysis.qmd
+
+  - part: Getting Started with Nextflow
+    chapters:
+      - installation.qmd
+      - your_first_pipeline.qmd
+
+  - part: Running Nextflow workflows
+    chapters:
+      - configuration.qmd
+
   - part: Foundations
     chapters: 
       - workflow_overview.qmd

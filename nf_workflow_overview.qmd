@@ -1,0 +1,6 @@
+# Why Workflow Engines & Nextflow
+
+Problems workflows solve; DSL2 mental model; channels vs processes; reproducibility.
+
+Hands‑on: “Hello, Channel” (tiny pipeline).
+

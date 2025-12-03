@@ -1,0 +1,20 @@
+# Configuration
+
+
+
+## Built-in configuration options in Nextflow
+ 
+ 
+ `launchDir: Path`: 
+
+     The directory where Nextflow is launched. Typically this is the project root directory.
+ 
+
+`projectDir: Path`: 
+
+    The root directory of the Nextflow project. By default, this is the same as `launchDir`, but it can be different if you are running a pipeline from a different location.
+
+
+`secrets: Map<String,String>`: 
+
+    A map of secret values that can be used in the workflow. This is useful for storing sensitive information such as API keys or passwords.
