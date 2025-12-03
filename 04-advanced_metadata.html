@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>8&nbsp; Validating Input with nf-schema – Mastering Nextflow: From Fundamentals to Expert Practice</title>
+<title>9&nbsp; Validating Input with nf-schema – Mastering Nextflow: From Fundamentals to Expert Practice</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -117,7 +117,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-advanced_metadata.html">Advanced Topics</a></li><li class="breadcrumb-item"><a href="./04-advanced_metadata.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Validating Input with <code>nf-schema</code></span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-advanced_metadata.html">Advanced Topics</a></li><li class="breadcrumb-item"><a href="./04-advanced_metadata.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Validating Input with <code>nf-schema</code></span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -187,6 +187,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">DSL2</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Workflows in Nextflow</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -201,7 +207,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-results.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Test 3</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Test 3</span></span></a>
   </div>
 </li>
       </ul>
@@ -218,7 +224,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-advanced_metadata.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Validating Input with <code>nf-schema</code></span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Validating Input with <code>nf-schema</code></span></span></a>
   </div>
 </li>
       </ul>
@@ -233,18 +239,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#utilizing" id="toc-utilizing" class="nav-link active" data-scroll-target="#utilizing"><span class="header-section-number">8.1</span> Utilizing</a></li>
-  <li><a href="#schema-will-check-whether-the-files-exist-or-not" id="toc-schema-will-check-whether-the-files-exist-or-not" class="nav-link" data-scroll-target="#schema-will-check-whether-the-files-exist-or-not"><span class="header-section-number">8.2</span> Schema will check whether the files exist or not</a></li>
-  <li><a href="#transform-samplesheet-in-csv-to-structured-nextflow-channell" id="toc-transform-samplesheet-in-csv-to-structured-nextflow-channell" class="nav-link" data-scroll-target="#transform-samplesheet-in-csv-to-structured-nextflow-channell"><span class="header-section-number">8.3</span> Transform samplesheet in CSV to structured NextFlow channell</a></li>
+  <li><a href="#utilizing" id="toc-utilizing" class="nav-link active" data-scroll-target="#utilizing"><span class="header-section-number">9.1</span> Utilizing</a></li>
+  <li><a href="#schema-will-check-whether-the-files-exist-or-not" id="toc-schema-will-check-whether-the-files-exist-or-not" class="nav-link" data-scroll-target="#schema-will-check-whether-the-files-exist-or-not"><span class="header-section-number">9.2</span> Schema will check whether the files exist or not</a></li>
+  <li><a href="#transform-samplesheet-in-csv-to-structured-nextflow-channell" id="toc-transform-samplesheet-in-csv-to-structured-nextflow-channell" class="nav-link" data-scroll-target="#transform-samplesheet-in-csv-to-structured-nextflow-channell"><span class="header-section-number">9.3</span> Transform samplesheet in CSV to structured NextFlow channell</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-advanced_metadata.html">Advanced Topics</a></li><li class="breadcrumb-item"><a href="./04-advanced_metadata.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Validating Input with <code>nf-schema</code></span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-advanced_metadata.html">Advanced Topics</a></li><li class="breadcrumb-item"><a href="./04-advanced_metadata.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Validating Input with <code>nf-schema</code></span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Validating Input with <code>nf-schema</code></span></h1>
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Validating Input with <code>nf-schema</code></span></h1>
 </div>
 
 
@@ -261,8 +267,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="utilizing" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="utilizing"><span class="header-section-number">8.1</span> Utilizing</h2>
+<section id="utilizing" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="utilizing"><span class="header-section-number">9.1</span> Utilizing</h2>
 <p>This Nextflow plugin provides functionality that can be used in a Nextflow pipeline to work with parameter and sample sheet schema. The added functionality is:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>nextflow.enable.dsl <span class="ot">=</span> <span class="dv">2</span></span>
@@ -307,8 +313,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">-c</span> nf_example/test_nf_schema_input.conf </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="schema-will-check-whether-the-files-exist-or-not" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="schema-will-check-whether-the-files-exist-or-not"><span class="header-section-number">8.2</span> Schema will check whether the files exist or not</h2>
+<section id="schema-will-check-whether-the-files-exist-or-not" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="schema-will-check-whether-the-files-exist-or-not"><span class="header-section-number">9.2</span> Schema will check whether the files exist or not</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run .  <span class="dt">\</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">-main-script</span> nf_example/test_nf_schema_input.nf <span class="dt">\</span></span>
@@ -335,8 +341,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="transform-samplesheet-in-csv-to-structured-nextflow-channell" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="transform-samplesheet-in-csv-to-structured-nextflow-channell"><span class="header-section-number">8.3</span> Transform samplesheet in CSV to structured NextFlow channell</h2>
+<section id="transform-samplesheet-in-csv-to-structured-nextflow-channell" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="transform-samplesheet-in-csv-to-structured-nextflow-channell"><span class="header-section-number">9.3</span> Transform samplesheet in CSV to structured NextFlow channell</h2>
 <p>In the code above, a plain Groovy list is returned.</p>
 <p>The code below uses explicit <code>tuple()</code> constructor - the canonical DSL 2 form, making it unambiguous and self-documenting.</p>
 <div class="cell">
@@ -811,7 +817,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./03-results.html" class="pagination-link" aria-label="Test 3">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Test 3</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Test 3</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
