@@ -14,7 +14,7 @@
     "href": "index.html#star-this-repository",
     "title": "Mastering Nextflow: From Fundamentals to Expert Practice",
     "section": "1.1 Star This Repository",
-    "text": "1.1 Star This Repository\nIf you find this Nextflow tutorial helpful, please consider starring the repository on GitHub! Your support helps others discover this resource and motivates continued development.\n\n\n\nGitHub stars\n\n\nStar on GitHub →\n\nChannel.fromPath(params.metatab) .splitCsv(header:true, sep:‘,’)",
+    "text": "1.1 Star This Repository\nIf you find this Nextflow tutorial helpful, please consider starring the repository on GitHub! Your support helps others discover this resource and motivates continued development.\n\n\n\nGitHub stars\n\n\nStar on GitHub →\n\nChannel.fromPath(params.metatab) .splitCsv(header:true, sep:‘,’)\n\nMake Bioinformatics Analyses more reproducible\nAutomate complex workflows\nScale analyses across multiple compute nodes\nMake it easier to run the same ccode across different computing platforms\n\nWhy is it imprortant to modularize your workflow code?\nYOu can reuse the same modules in multiple workflows without rewriting code. It makes code maintanace easier\nIt can make code more readable by breaking it into smaller, manageable pieces.\nCan you control the name of the task directories created at runtime under work/?\nIs there a logic for why some arguments use a single dash (-resume) and some use a double dash (–input)?\nSingle-dash options (-X) are built-in Nextflow runtime flags\nDouble-dash options (–param value) are pipeline parameters\nDoes it matter in what order you write inputs in a process call?",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Intro</span>"
     ]
@@ -30,102 +30,112 @@
     ]
   },
   {
-    "objectID": "workflow_overview.html",
-    "href": "workflow_overview.html",
-    "title": "4  Why Workflow Engines & Nextflow",
+    "objectID": "introduction.html",
+    "href": "introduction.html",
+    "title": "3  Nextflow notes",
+    "section": "",
+    "text": "3.1 The process and workflow constructs\nIn NextFlow, a process construct defines a computational step that can be executed in isolation. Each process has its own input and output channels, allowing for flexible data flow between different steps in a workflow. Processes can be run in parallel, making it easy to scale up analyses across multiple compute nodes.\nA workflow construct, on the other hand, is used to define the overall structure of a NextFlow script. It specifies how processes are connected and the order in which they are executed. Workflows can include conditional logic, loops, and other control structures to manage complex data processing pipelines.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Nextflow notes</span>"
+    ]
+  },
+  {
+    "objectID": "nf_configuration.html",
+    "href": "nf_configuration.html",
+    "title": "7  Configuration",
+    "section": "",
+    "text": "7.1 Built-in configuration options in Nextflow\nlaunchDir: Path:\nprojectDir: Path:\nsecrets: Map&lt;String,String&gt;:",
+    "crumbs": [
+      "Running Nextflow workflows",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Configuration</span>"
+    ]
+  },
+  {
+    "objectID": "nf_configuration.html#built-in-configuration-options-in-nextflow",
+    "href": "nf_configuration.html#built-in-configuration-options-in-nextflow",
+    "title": "7  Configuration",
+    "section": "",
+    "text": "The directory where Nextflow is launched. Typically this is the project root directory.\n\nThe root directory of the Nextflow project. By default, this is the same as `launchDir`, but it can be different if you are running a pipeline from a different location.\n\nA map of secret values that can be used in the workflow. This is useful for storing sensitive information such as API keys or passwords.",
+    "crumbs": [
+      "Running Nextflow workflows",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Configuration</span>"
+    ]
+  },
+  {
+    "objectID": "nf_workflow_overview.html",
+    "href": "nf_workflow_overview.html",
+    "title": "8  Why Workflow Engines & Nextflow",
     "section": "",
     "text": "Problems workflows solve; DSL2 mental model; channels vs processes; reproducibility.\nHands‑on: “Hello, Channel” (tiny pipeline).",
     "crumbs": [
       "Foundations",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Why Workflow Engines & Nextflow</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Why Workflow Engines & Nextflow</span>"
     ]
   },
   {
-    "objectID": "channels_processes.html",
-    "href": "channels_processes.html",
-    "title": "5  Channel and Process",
+    "objectID": "nf_channels_processes.html",
+    "href": "nf_channels_processes.html",
+    "title": "9  Channel and Process",
     "section": "",
     "text": "nextflow.enable.dsl=2\n\nparams {\n    run_dir: Path \n}\n\nworkflow {\n\n  /*\n   * fromFilePairs pairs R1/R2 using the part before `_R{1,2}_001.fastq.gz` as the key.\n   * For files like JS10_S10_R1_001.fastq.gz, the key becomes `JS10_S10`.\n   */\n  Channel\n    .fromFilePairs(\"${params.run_dir}/Sample_*/*_R{1,2}_001.fastq.gz\", flat: true)\n    .map { pairKey, read1, read2 -&gt;\n      def m = (pairKey =~ /^([^_]+)_S(\\d+)$/)\n      assert m.find() : \"Unexpected key: ${pairKey}\"\n      def sid  = m.group(1)               // e.g., JS05\n      def snum = m.group(2) as int        // e.g., 5\n      def meta = [ id: sid, sample_num: snum, single_end: (read2 == null) ]\n      tuple(sid, meta, [read1, read2].findAll { it })   // normalize reads list\n    }\n    .set { samples_ch }\n\n  // (optional) peek\n  samples_ch.view()\n}\n\n\nnextflow run . \\\n  -main-script nf_example/test_nf_FilePair.nf \\\n  --run_dir test_data/20251023_LH00584_0352_A22FHJMLT1/JonSnow_CS000110_10WGBS_080722/\n\n\n\n\n\n\n\nNote\n\n\n\nNextflow log \nN E X T F L O W ~ version 25.10.0\nLaunching nf_example/test_nf_FilePair.nf [big_cori] DSL2 - revision: 2da61b6e62\n[JS05, [id:JS05, sample_num:5, single_end:false], [/mnt/ccrsf-static/Analysis/xies4/github_repos/nextflow_note/test_data/20251023_LH00584_0352_A22FHJMLT1/JonSnow_CS000110_10WGBS_080722/Sample_JS05/JS05_S5_R1_001.fastq.gz, /mnt/ccrsf-static/Analysis/xies4/github_repos/nextflow_note/test_data/20251023_LH00584_0352_A22FHJMLT1/JonSnow_CS000110_10WGBS_080722/Sample_JS05/JS05_S5_R2_001.fastq.gz]] [JS01, [id:JS01, sample_num:1, single_end:false], [/mnt/ccrsf-static/Analysis/xies4/github_repos/nextflow_note/test_data/20251023_LH00584_0352_A22FHJMLT1/JonSnow_CS000110_10WGBS_080722/Sample_JS01/JS01_S1_R1_001.fastq.gz, /mnt/ccrsf-static/Analysis/xies4/github_repos/nextflow_note/test_data/20251023_LH00584_0352_A22FHJMLT1/JonSnow_CS000110_10WGBS_080722/Sample_JS01/JS01_S1_R2_001.fastq.gz]] [JS04, [id:JS04, sample_num:4, single_end:false], [/mnt/ccrsf-static/Analysis/xies4/github_repos/nextflow_note/test_data/20251023_LH00584_0352_A22FHJMLT1/JonSnow_CS000110_10WGBS_080722/Sample_JS04/JS04_S4_R1_001.fastq.gz, /mnt/ccrsf-static/Analysis/xies4/github_repos/nextflow_note/test_data/20251023_LH00584_0352_A22FHJMLT1/JonSnow_CS000110_10WGBS_080722/Sample_JS04/JS04_S4_R2_001.fastq.gz]] [JS02, [id:JS02, sample_num:2, single_end:false], [/mnt/ccrsf-static/Analysis/xies4/github_repos/nextflow_note/test_data/20251023_LH00584_0352_A22FHJMLT1/JonSnow_CS000110_10WGBS_080722/Sample_JS02/JS02_S2_R1_001.fastq.gz, /mnt/ccrsf-static/Analysis/xies4/github_repos/nextflow_note/test_data/20251023_LH00584_0352_A22FHJMLT1/JonSnow_CS000110_10WGBS_080722/Sample_JS02/JS02_S2_R2_001.fastq.gz]] [JS03, [id:JS03, sample_num:3, single_end:false], [/mnt/ccrsf-static/Analysis/xies4/github_repos/nextflow_note/test_data/20251023_LH00584_0352_A22FHJMLT1/JonSnow_CS000110_10WGBS_080722/Sample_JS03/JS03_S3_R1_001.fastq.gz, /mnt/ccrsf-static/Analysis/xies4/github_repos/nextflow_note/test_data/20251023_LH00584_0352_A22FHJMLT1/JonSnow_CS000110_10WGBS_080722/Sample_JS03/JS03_S3_R2_001.fastq.gz]] [JS06, [id:JS06, sample_num:6, single_end:false], [/mnt/ccrsf-static/Analysis/xies4/github_repos/nextflow_note/test_data/20251023_LH00584_0352_A22FHJMLT1/JonSnow_CS000110_10WGBS_080722/Sample_JS06/JS06_S6_R1_001.fastq.gz, /mnt/ccrsf-static/Analysis/xies4/github_repos/nextflow_note/test_data/20251023_LH00584_0352_A22FHJMLT1/JonSnow_CS000110_10WGBS_080722/Sample_JS06/JS06_S6_R2_001.fastq.gz]]",
     "crumbs": [
       "Foundations",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Channel and Process</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Channel and Process</span>"
     ]
   },
   {
-    "objectID": "DSL2.html",
-    "href": "DSL2.html",
-    "title": "6  DSL2",
+    "objectID": "nf_DSL2.html",
+    "href": "nf_DSL2.html",
+    "title": "10  DSL2",
     "section": "",
-    "text": "6.1 Modules\nA module is a Nextflow script containing one or more process definitions that can be imported from another Nextflow script.\nA process can be invoked as a function in the workflow scope, passing the expected input channels as parameters as it if were a custom function.\nprocess bar {\n    input:\n      path x\n    output:\n      path 'bar.txt'\n    script:\n      \"\"\"\n      your_command $x &gt; bar.txt\n      \"\"\"\n}\n\nworkflow {\n    data = channel.fromPath('/some/path/*.txt')\n    bar(data)\n}\nReference https://icbi-lab.github.io/current-topics-bioinformatics-lecture/07_nextflow_dsl2.html#7\nModule components can be imported using the include keyword.\ninclude { foo } from './some/module'\n\nworkflow {\n    data = channel.fromPath('/some/data/*.txt')\n    foo(data)\n}\nMultiple inclusion\ninclude { foo; bar } from './some/module'\n\nworkflow {\n    data = channel.fromPath('/some/data/*.txt')\n    foo(data)\n    bar(data)\n}\nProcess outputs can either be assigned to a variable or accessed using the implicit .out attribute\ninclude { INDEX; FASTQC; QUANT; MULTIQC } from './module/script.nf' \n\nread_pairs_ch = channel.fromFilePairs( params.reads)\n\nworkflow {\n  INDEX( params.transcriptome )\n  FASTQC( read_pairs_ch )\n  QUANT( INDEX.out, read_pairs_ch )\n  MULTIQC( QUANT.out.mix(FASTQC.out).collect(), multiqc_file )\n}\nNote: channels may now be used as inputs multiple times without the need to duplicate them\nuse the emit option to define a name identifier that can be used to reference the channel in the external scope.\nprocess foo {\n  output:\n    path '*.bam', emit: samples_bam\n\n  '''\n  your_command --here\n  '''\n}\n\nworkflow {\n    foo()\n    foo.out.samples_bam.view()\n}\n… inclusion and invocation of components with the same name from different modules\ninclude { foo } from './some/module'\ninclude { foo as bar } from './other/module'\n\nworkflow {\n    foo(some_data)\n    bar(other_data)\n}\n… inclusion and the invocation of the same component multiple times\n#| echo: true #| eval: false include { foo as foo_a; foo as foo_b } from ‘./some/module’\nworkflow { foo_a(some_data) foo_b(other_data) }\n:::\nDefine one or more parameters in the module\n#| echo: true #| eval: false params.foo = ‘Hello’ params.bar = ‘world!’\ndef sayHello() { println “$params.foo $params.bar” }",
+    "text": "10.1 Modules\nA module is a Nextflow script containing one or more process definitions that can be imported from another Nextflow script.\nA process can be invoked as a function in the workflow scope, passing the expected input channels as parameters as it if were a custom function.\nprocess bar {\n    input:\n      path x\n    output:\n      path 'bar.txt'\n    script:\n      \"\"\"\n      your_command $x &gt; bar.txt\n      \"\"\"\n}\n\nworkflow {\n    data = channel.fromPath('/some/path/*.txt')\n    bar(data)\n}\nReference https://icbi-lab.github.io/current-topics-bioinformatics-lecture/07_nextflow_dsl2.html#7\nModule components can be imported using the include keyword.\ninclude { foo } from './some/module'\n\nworkflow {\n    data = channel.fromPath('/some/data/*.txt')\n    foo(data)\n}\nMultiple inclusion\ninclude { foo; bar } from './some/module'\n\nworkflow {\n    data = channel.fromPath('/some/data/*.txt')\n    foo(data)\n    bar(data)\n}\nProcess outputs can either be assigned to a variable or accessed using the implicit .out attribute\ninclude { INDEX; FASTQC; QUANT; MULTIQC } from './module/script.nf' \n\nread_pairs_ch = channel.fromFilePairs( params.reads)\n\nworkflow {\n  INDEX( params.transcriptome )\n  FASTQC( read_pairs_ch )\n  QUANT( INDEX.out, read_pairs_ch )\n  MULTIQC( QUANT.out.mix(FASTQC.out).collect(), multiqc_file )\n}\nNote: channels may now be used as inputs multiple times without the need to duplicate them\nuse the emit option to define a name identifier that can be used to reference the channel in the external scope.\nprocess foo {\n  output:\n    path '*.bam', emit: samples_bam\n\n  '''\n  your_command --here\n  '''\n}\n\nworkflow {\n    foo()\n    foo.out.samples_bam.view()\n}\n… inclusion and invocation of components with the same name from different modules\ninclude { foo } from './some/module'\ninclude { foo as bar } from './other/module'\n\nworkflow {\n    foo(some_data)\n    bar(other_data)\n}\n… inclusion and the invocation of the same component multiple times\n#| echo: true #| eval: false include { foo as foo_a; foo as foo_b } from ‘./some/module’\nworkflow { foo_a(some_data) foo_b(other_data) }\n:::\nDefine one or more parameters in the module\n#| echo: true #| eval: false params.foo = ‘Hello’ params.bar = ‘world!’\ndef sayHello() { println “$params.foo $params.bar” }",
     "crumbs": [
       "Foundations",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>DSL2</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>DSL2</span>"
     ]
   },
   {
-    "objectID": "DSL2.html#modules",
-    "href": "DSL2.html#modules",
-    "title": "6  DSL2",
+    "objectID": "nf_DSL2.html#modules",
+    "href": "nf_DSL2.html#modules",
+    "title": "10  DSL2",
     "section": "",
     "text": "## Parameters\n\n### Parameter block\n\nSince Nextflow 25.10.0, you can define parameters in a dedicated `params` block.\n\nTo enable this feature, set the environment variable `NXF_SYNTAX_PARSER` to `v2` before running Nextflow:\n\n\n::: {.cell}\n\n```{.sh .cell-code}\nexport NXF_SYNTAX_PARSER=v2",
     "crumbs": [
       "Foundations",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>DSL2</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>DSL2</span>"
     ]
   },
   {
-    "objectID": "workflow.html",
-    "href": "workflow.html",
-    "title": "7  Workflows in Nextflow",
-    "section": "",
-    "text": "7.1 Workflow output\nIn Nextflow, a workflow is a high-level construct that orchestrates the execution of multiple processes and sub-workflows. It defines the overall structure and flow of data through the various components of your pipeline.\nnextflow.enable.dsl=2\n\n// If you use typed params, enable the strict parser when running:\n// NXF_SYNTAX_PARSER=v2 nextflow run sra2fastq.nf ...\nparams {\n  meta:   Path = \"sample_meta.csv\"\n  outdir: Path = \"fastq_test\"   // we'll point -output-dir at this\n}\n\nprocess SRA2FASTQ {\n  tag \"${sample_id}\"\n\n  input:\n  tuple val(sample_id), val(sra_id)\n\n  output:\n  // emit sample_id along with both FASTQs as a single pattern\n  //[id: val(sample_id), read1: file(\"${sample_id}_1.fastq.gz\"), read2: file(\"${sample_id}_2.fastq.gz\")]\n  tuple val(sample_id), path(\"${sample_id}_*.fastq.gz\")\n\n  script:\n  \"\"\"\n  echo \"Processing ${sample_id} with SRA ID ${sra_id} R1\\n\" |gzip - &gt; ${sample_id}_1.fastq.gz\n  echo \"Processing ${sample_id} with SRA ID ${sra_id} R2\\n\" |gzip - &gt; ${sample_id}_2.fastq.gz\n  \"\"\"\n}\n\nworkflow {\n  main:\n  ch_fastqs = Channel\n               .fromPath(params.meta)\n               .splitCsv(header: false)\n               .map { row -&gt; tuple(row[0], row[1]) }\n               | SRA2FASTQ\n\n  ch_fastqs.view()\n  println \"Total samples processed: ${ch_fastqs.count().next()}\"\n  // println \"Sample IDs: ${ch_fastqs.map{ it[0] }.join(', ')}\"\n  println \"Meta data file used: ${params.meta.toString()}\"\n  println \"Output directory: ${params.outdir.toString()}\"\n  publish:\n  fastqs = ch_fastqs\n  \n}\n\n\n// ---- workflow outputs block (v25.10+) ----\noutput {\n  // Publish to &lt;outputDir&gt;/&lt;sample_id&gt;/&lt;files&gt;\n  fastqs {\n    mode 'copy'\n    // Use a closure so we can include the sample_id and keep filenames\n    path { fastq -&gt; \n      fastq[1][0] &gt;&gt; \"${params.outdir}/${fastq[0]}/\" \n      fastq[1][1] &gt;&gt; \"${params.outdir}/${fastq[0]}/\"\n    }\n  }\n}\nnextflow run . \\\n  -main-script nf_example/test_output_block.nf \\\n  --meta test_data/sample_meta_sra.csv",
+    "objectID": "nf_DSL2.html#sub-workflows",
+    "href": "nf_DSL2.html#sub-workflows",
+    "title": "10  DSL2",
+    "section": "10.2 sub-workflows",
+    "text": "10.2 sub-workflows",
     "crumbs": [
       "Foundations",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Workflows in Nextflow</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>DSL2</span>"
     ]
   },
   {
-    "objectID": "03-results.html",
-    "href": "03-results.html",
-    "title": "8  Test 3",
+    "objectID": "nf_DSL2.html#workflow",
+    "href": "nf_DSL2.html#workflow",
+    "title": "10  DSL2",
+    "section": "10.3 workflow",
+    "text": "10.3 workflow\nWorkflows defined in your script or imported by a module inclusion can be invoked and composed as any other process in your application.",
+    "crumbs": [
+      "Foundations",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>DSL2</span>"
+    ]
+  },
+  {
+    "objectID": "nf_workflow.html",
+    "href": "nf_workflow.html",
+    "title": "11  Workflows in Nextflow",
     "section": "",
-    "text": "Test3",
+    "text": "11.1 Workflow output\nIn Nextflow, a workflow is a high-level construct that orchestrates the execution of multiple processes and sub-workflows. It defines the overall structure and flow of data through the various components of your pipeline.\nnextflow.enable.dsl=2\n\n// If you use typed params, enable the strict parser when running:\n// NXF_SYNTAX_PARSER=v2 nextflow run sra2fastq.nf ...\nparams {\n  meta:   Path = \"sample_meta.csv\"\n  outdir: Path = \"fastq_test\"   // we'll point -output-dir at this\n}\n\nprocess SRA2FASTQ {\n  tag \"${sample_id}\"\n\n  input:\n  tuple val(sample_id), val(sra_id)\n\n  output:\n  // emit sample_id along with both FASTQs as a single pattern\n  //[id: val(sample_id), read1: file(\"${sample_id}_1.fastq.gz\"), read2: file(\"${sample_id}_2.fastq.gz\")]\n  tuple val(sample_id), path(\"${sample_id}_*.fastq.gz\")\n\n  script:\n  \"\"\"\n  echo \"Processing ${sample_id} with SRA ID ${sra_id} R1\\n\" |gzip - &gt; ${sample_id}_1.fastq.gz\n  echo \"Processing ${sample_id} with SRA ID ${sra_id} R2\\n\" |gzip - &gt; ${sample_id}_2.fastq.gz\n  \"\"\"\n}\n\nworkflow {\n  main:\n  ch_fastqs = Channel\n               .fromPath(params.meta)\n               .splitCsv(header: false)\n               .map { row -&gt; tuple(row[0], row[1]) }\n               | SRA2FASTQ\n\n  ch_fastqs.view()\n  println \"Total samples processed: ${ch_fastqs.count().next()}\"\n  // println \"Sample IDs: ${ch_fastqs.map{ it[0] }.join(', ')}\"\n  println \"Meta data file used: ${params.meta.toString()}\"\n  println \"Output directory: ${params.outdir.toString()}\"\n  publish:\n  fastqs = ch_fastqs\n  \n}\n\n\n// ---- workflow outputs block (v25.10+) ----\noutput {\n  // Publish to &lt;outputDir&gt;/&lt;sample_id&gt;/&lt;files&gt;\n  fastqs {\n    mode 'copy'\n    // Use a closure so we can include the sample_id and keep filenames\n    path { fastq -&gt; \n      fastq[1][0] &gt;&gt; \"${params.outdir}/${fastq[0]}/\" \n      fastq[1][1] &gt;&gt; \"${params.outdir}/${fastq[0]}/\"\n    }\n  }\n}\nnextflow run . \\\n  -main-script nf_example/test_output_block.nf \\\n  --meta test_data/sample_meta_sra.csv",
     "crumbs": [
-      "Building Real Pipelines",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Test 3</span>"
-    ]
-  },
-  {
-    "objectID": "04-advanced_metadata.html",
-    "href": "04-advanced_metadata.html",
-    "title": "9  Validating Input with nf-schema",
-    "section": "",
-    "text": "9.1 Utilizing\nThis Nextflow plugin provides functionality that can be used in a Nextflow pipeline to work with parameter and sample sheet schema. The added functionality is:\nnextflow.enable.dsl = 2\n\n/*\n  Standardize input reads from a samplesheet using nf-schema helper.\n\n  Emits: samples_ch → tuple(id, meta_map, reads_list)\n          - id:     sample identifier (string)\n          - meta:   map including `single_end: true|false` plus original fields\n          - reads:  [read1] for SE, [read1, read2] for PE\n*/\n\nparams {\n    sample_table: Path = \"test_data/sample_meta_simple.csv\"\n}\n\ninclude { samplesheetToList } from 'plugin/nf-schema'\n\nworkflow {\n\n    Channel\n        .fromList(samplesheetToList(params.sample_table, \"${projectDir}/assets/schema_input.json\"))\n        .map {\n            meta, read1, read2 -&gt;\n                if (!read2) {\n                    return [ meta.id, meta + [ single_end:true ], [ read1 ] ]\n                } else {\n                    return [ meta.id, meta + [ single_end:false ], [ read1, read2 ] ]\n                }\n        }\n        .set { samples_ch }\n\n    samples_ch.view()\n    // Also log the channel object (structure, not contents)\n    log.info \"Sample channel created: ${samples_ch}\"\n}\nnextflow run . \\\n      -main-script nf_example/test_nf_schema_input.nf \\\n      -c nf_example/test_nf_schema_input.conf",
-    "crumbs": [
-      "Advanced Topics",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Validating Input with `nf-schema`</span>"
-    ]
-  },
-  {
-    "objectID": "04-advanced_metadata.html#schema-will-check-whether-the-files-exist-or-not",
-    "href": "04-advanced_metadata.html#schema-will-check-whether-the-files-exist-or-not",
-    "title": "9  Validating Input with nf-schema",
-    "section": "9.2 Schema will check whether the files exist or not",
-    "text": "9.2 Schema will check whether the files exist or not\n\nnextflow run .  \\\n     -main-script nf_example/test_nf_schema_input.nf \\\n     -c nf_example/test_nf_schema_input.conf \\\n     --sample_table test_data/sample_meta_FileNotExist.csv \n\nWith the schema setting, the files specified in read1 and read2 fields have to exist.\nIf not, the error message below will be shown:\n\n\n\n\n\n\nWarningError\n\n\n\nN E X T F L O W ~ version 25.10.0\nLaunching nf_example/test_nf_schema_input.nf [romantic_gutenberg] DSL2 - revision: eb82818f4d\nERROR ~ Validation of samplesheet failed!\n– Check ‘.nextflow.log’ file for details The following errors have been detected in /mnt/ccrsf-static/Analysis/xies4/github_repos/nextflow_note/test_data/sample_meta_FileNotExist.csv:\n-&gt; Entry 1: Error for field ‘read2’ (/path/to/sample1_fc1_R2.fastq.gz;/path/to/sample1_fc1_R2.fastq.gz): the file or directory ‘/path/to/sample1_fc1_R2.fastq.gz;/path/to/sample1_fc1_R2.fastq.gz’ does not exist (FastQ file for reads 2 cannot contain spaces and must have extension ‘.fq.gz’ or ‘.fastq.gz’) -&gt; Entry 1: Error for field ‘read1’ (/path/to/sample1_fc1_R1.fastq.gz;/path/to/sample1_fc1_R1.fastq.gz): the file or directory ‘/path/to/sample1_fc1_R1.fastq.gz;/path/to/sample1_fc1_R1.fastq.gz’ does not exist (FastQ file for reads 1 must be provided, cannot contain spaces and must have extension ‘.fq.gz’ or ‘.fastq.gz’) -&gt; Entry 2: Error for field ‘read2’ (/path/to/sample2_fc1_R2.fastq.gz;/path/to/sample2_fc1_R2.fastq.gz): the file or directory ‘/path/to/sample2_fc1_R2.fastq.gz;/path/to/sample2_fc1_R2.fastq.gz’ does not exist (FastQ file for reads 2 cannot contain spaces and must have extension ‘.fq.gz’ or ‘.fastq.gz’) -&gt; Entry 2: Error for field ‘read1’ (/path/to/sample2_fc1_R1.fastq.gz;/path/to/sample2_fc1_R1.fastq.gz): the file or directory ‘/path/to/sample2_fc1_R1.fastq.gz;/path/to/sample2_fc1_R1.fastq.gz’ does not exist (FastQ file for reads 1 must be provided, cannot contain spaces and must have extension ‘.fq.gz’ or ‘.fastq.gz’) -&gt; Entry 3: Error for field ‘read2’ (/path/to/sample3_fc1_R2.fastq.gz;/path/to/sample3_fc1_R2.fastq.gz): the file or directory ‘/path/to/sample3_fc1_R2.fastq.gz;/path/to/sample3_fc1_R2.fastq.gz’ does not exist (FastQ file for reads 2 cannot contain spaces and must have extension ‘.fq.gz’ or ‘.fastq.gz’) -&gt; Entry 3: Error for field ‘read1’ (/path/to/sample3_fc1_R1.fastq.gz;/path/to/sample3_fc1_R1.fastq.gz): the file or directory ‘/path/to/sample3_fc1_R1.fastq.gz;/path/to/sample3_fc1_R1.fastq.gz’ does not exist (FastQ file for reads 1 must be provided, cannot contain spaces and must have extension ‘.fq.gz’ or ‘.fastq.gz’)",
-    "crumbs": [
-      "Advanced Topics",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Validating Input with `nf-schema`</span>"
-    ]
-  },
-  {
-    "objectID": "04-advanced_metadata.html#transform-samplesheet-in-csv-to-structured-nextflow-channell",
-    "href": "04-advanced_metadata.html#transform-samplesheet-in-csv-to-structured-nextflow-channell",
-    "title": "9  Validating Input with nf-schema",
-    "section": "9.3 Transform samplesheet in CSV to structured NextFlow channell",
-    "text": "9.3 Transform samplesheet in CSV to structured NextFlow channell\nIn the code above, a plain Groovy list is returned.\nThe code below uses explicit tuple() constructor - the canonical DSL 2 form, making it unambiguous and self-documenting.\n\nnextflow.enable.dsl=2\n\n/*\n  Standardize input reads from a samplesheet using nf-schema helper.\n\n  Emits: samples_ch → tuple(id, meta_map, reads_list)\n          - id:     sample identifier (string)\n          - meta:   map including `single_end: true|false` plus original fields\n          - reads:  [read1] for SE, [read1, read2] for PE\n*/\n\nparams.sample_table = file('test_data/sample_meta_simple.csv')\n\n// Helper that turns a samplesheet into a list of [meta, read1, read2?]\ninclude { samplesheetToList } from 'plugin/nf-schema'\n\nworkflow {\n\n  main:\n    Channel\n      .fromList( samplesheetToList(params.sample_table, \"${projectDir}/assets/schema_input.json\") )\n      .map { meta, read1, read2 -&gt;\n        def isSE = !read2\n        tuple(\n          meta.id as String,\n          meta + [ single_end: isSE ],\n          isSE ? [ read1 ] : [ read1, read2 ]\n        )\n      }\n      .set { samples_ch }\n\n    // Optional: inspect the standardized tuples during development\n    samples_ch.view { it }\n\n    // Also log the channel object (structure, not contents)\n    log.info \"Sample channel created: ${samples_ch}\"\n    println \"The Groovy object type of 'samples_ch' is: ${samples_ch.getClass()}\\n\"\n\n    samples_ch.subscribe { item -&gt;\n      println \"Type: ${item.getClass()} | Value: ${item}\"\n    }\n\n}\n\nThis is the standard tuple structure most downstream modules in DSL2 workflows (e.g. nf-core) expect.\n\ntuple(id, meta_map, reads_list)\n\nExplicit tuples make your workflow compatible with DSL 2 modules, where inputs are declared like:\n\ninput: \ntuple val(id), val(meta), path(reads)\n\nThe code below collapses the if/else block into a one-liner ternary operator. The variable isSE stores the boolean.\n\ndef isSE = !read2\ntuple(\n  meta.id as String,\n  meta + [ single_end: isSE ],\n  isSE ? [ read1 ] : [ read1, read2 ]\n)\n\nThis style makes your mapping functional and side-effect-free, which aligns better with how Nextflow channels are transformed. It’s also easier to maintain if you later expand the tuple (e.g., add another metadata field).",
-    "crumbs": [
-      "Advanced Topics",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Validating Input with `nf-schema`</span>"
+      "Foundations",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Workflows in Nextflow</span>"
     ]
   }
 ]

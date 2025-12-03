@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>9&nbsp; Validating Input with nf-schema – Mastering Nextflow: From Fundamentals to Expert Practice</title>
+<title>10&nbsp; DSL2 – Mastering Nextflow: From Fundamentals to Expert Practice</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./03-results.html" rel="prev">
+<link href="./nf_workflow.html" rel="next">
+<link href="./nf_channels_processes.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -117,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-advanced_metadata.html">Advanced Topics</a></li><li class="breadcrumb-item"><a href="./04-advanced_metadata.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Validating Input with <code>nf-schema</code></span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./nf_workflow_overview.html">Foundations</a></li><li class="breadcrumb-item"><a href="./nf_DSL2.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">DSL2</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -163,7 +164,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Foundations</span></a>
+ <span class="menu-text">Analysis of WGBS data</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -171,26 +172,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./workflow_overview.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Why Workflow Engines &amp; Nextflow</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./channels_processes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Channel and Process</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./DSL2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">DSL2</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./workflow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Workflows in Nextflow</span></span></a>
+  <a href="./nf_wgb_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">nf_wgb_analysis.html</span></span></a>
   </div>
 </li>
       </ul>
@@ -198,7 +181,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Building Real Pipelines</span></a>
+ <span class="menu-text">Getting Started with Nextflow</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -206,8 +189,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-results.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Test 3</span></span></a>
+  <a href="./nf_installation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">nf_installation.html</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./nf_your_first_pipeline.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">nf_your_first_pipeline.html</span></span></a>
   </div>
 </li>
       </ul>
@@ -215,7 +204,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Advanced Topics</span></a>
+ <span class="menu-text">Running Nextflow workflows</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -223,8 +212,77 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-advanced_metadata.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Validating Input with <code>nf-schema</code></span></span></a>
+  <a href="./nf_configuration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Configuration</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./nf_workflow_overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Why Workflow Engines &amp; Nextflow</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./nf_channels_processes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Channel and Process</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./nf_DSL2.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">DSL2</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./nf_workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Workflows in Nextflow</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Building Real Pipelines</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./nf_results.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">nf_results.html</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Advanced Topics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./nf_advanced_metadata.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">nf_advanced_metadata.html</span></span></a>
   </div>
 </li>
       </ul>
@@ -239,18 +297,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#utilizing" id="toc-utilizing" class="nav-link active" data-scroll-target="#utilizing"><span class="header-section-number">9.1</span> Utilizing</a></li>
-  <li><a href="#schema-will-check-whether-the-files-exist-or-not" id="toc-schema-will-check-whether-the-files-exist-or-not" class="nav-link" data-scroll-target="#schema-will-check-whether-the-files-exist-or-not"><span class="header-section-number">9.2</span> Schema will check whether the files exist or not</a></li>
-  <li><a href="#transform-samplesheet-in-csv-to-structured-nextflow-channell" id="toc-transform-samplesheet-in-csv-to-structured-nextflow-channell" class="nav-link" data-scroll-target="#transform-samplesheet-in-csv-to-structured-nextflow-channell"><span class="header-section-number">9.3</span> Transform samplesheet in CSV to structured NextFlow channell</a></li>
+  <li><a href="#modules" id="toc-modules" class="nav-link active" data-scroll-target="#modules"><span class="header-section-number">10.1</span> Modules</a></li>
+  <li><a href="#sub-workflows" id="toc-sub-workflows" class="nav-link" data-scroll-target="#sub-workflows"><span class="header-section-number">10.2</span> sub-workflows</a></li>
+  <li><a href="#workflow" id="toc-workflow" class="nav-link" data-scroll-target="#workflow"><span class="header-section-number">10.3</span> workflow</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-advanced_metadata.html">Advanced Topics</a></li><li class="breadcrumb-item"><a href="./04-advanced_metadata.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Validating Input with <code>nf-schema</code></span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./nf_workflow_overview.html">Foundations</a></li><li class="breadcrumb-item"><a href="./nf_DSL2.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">DSL2</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Validating Input with <code>nf-schema</code></span></h1>
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">DSL2</span></h1>
 </div>
 
 
@@ -267,148 +325,116 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="utilizing" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="utilizing"><span class="header-section-number">9.1</span> Utilizing</h2>
-<p>This Nextflow plugin provides functionality that can be used in a Nextflow pipeline to work with parameter and sample sheet schema. The added functionality is:</p>
+<section id="modules" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="modules"><span class="header-section-number">10.1</span> Modules</h2>
+<p>A module is a Nextflow script containing one or more process definitions that can be imported from another Nextflow script.</p>
+<p>A process can be invoked as a function in the workflow scope, passing the expected input channels as parameters as it if were a custom function.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>nextflow.enable.dsl <span class="ot">=</span> <span class="dv">2</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="sc">/</span><span class="er">*</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>  Standardize input reads from a samplesheet using nf<span class="sc">-</span>schema helper.</span>
-<span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a>  Emits<span class="sc">:</span> samples_ch → <span class="fu">tuple</span>(id, meta_map, reads_list)</span>
-<span id="cb1-7"><a href="#cb1-7"></a>          <span class="sc">-</span> id<span class="sc">:</span>     sample <span class="fu">identifier</span> (string)</span>
-<span id="cb1-8"><a href="#cb1-8"></a>          <span class="sc">-</span> meta<span class="sc">:</span>   map including <span class="st">`</span><span class="at">single_end: true|false</span><span class="st">`</span> plus original fields</span>
-<span id="cb1-9"><a href="#cb1-9"></a>          <span class="sc">-</span> reads<span class="sc">:</span>  [read1] <span class="cf">for</span> SE, [read1, read2] <span class="cf">for</span> PE</span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="sc">*</span><span class="er">/</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a></span>
-<span id="cb1-12"><a href="#cb1-12"></a>params {</span>
-<span id="cb1-13"><a href="#cb1-13"></a>    sample_table<span class="sc">:</span> Path <span class="ot">=</span> <span class="st">"test_data/sample_meta_simple.csv"</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a>}</span>
-<span id="cb1-15"><a href="#cb1-15"></a></span>
-<span id="cb1-16"><a href="#cb1-16"></a>include { samplesheetToList } from <span class="st">'plugin/nf-schema'</span></span>
-<span id="cb1-17"><a href="#cb1-17"></a></span>
-<span id="cb1-18"><a href="#cb1-18"></a>workflow {</span>
-<span id="cb1-19"><a href="#cb1-19"></a></span>
-<span id="cb1-20"><a href="#cb1-20"></a>    Channel</span>
-<span id="cb1-21"><a href="#cb1-21"></a>        <span class="fu">.fromList</span>(<span class="fu">samplesheetToList</span>(params.sample_table, <span class="st">"${projectDir}/assets/schema_input.json"</span>))</span>
-<span id="cb1-22"><a href="#cb1-22"></a>        .map {</span>
-<span id="cb1-23"><a href="#cb1-23"></a>            meta, read1, read2 <span class="ot">-&gt;</span></span>
-<span id="cb1-24"><a href="#cb1-24"></a>                <span class="cf">if</span> (<span class="sc">!</span>read2) {</span>
-<span id="cb1-25"><a href="#cb1-25"></a>                    return [ meta.id, meta <span class="sc">+</span> [ single_end<span class="sc">:</span>true ], [ read1 ] ]</span>
-<span id="cb1-26"><a href="#cb1-26"></a>                } <span class="cf">else</span> {</span>
-<span id="cb1-27"><a href="#cb1-27"></a>                    return [ meta.id, meta <span class="sc">+</span> [ single_end<span class="sc">:</span>false ], [ read1, read2 ] ]</span>
-<span id="cb1-28"><a href="#cb1-28"></a>                }</span>
-<span id="cb1-29"><a href="#cb1-29"></a>        }</span>
-<span id="cb1-30"><a href="#cb1-30"></a>        .set { samples_ch }</span>
-<span id="cb1-31"><a href="#cb1-31"></a></span>
-<span id="cb1-32"><a href="#cb1-32"></a>    <span class="fu">samples_ch.view</span>()</span>
-<span id="cb1-33"><a href="#cb1-33"></a>    <span class="sc">/</span><span class="er">/</span> Also log the channel <span class="fu">object</span> (structure, not contents)</span>
-<span id="cb1-34"><a href="#cb1-34"></a>    log.info <span class="st">"Sample channel created: ${samples_ch}"</span></span>
-<span id="cb1-35"><a href="#cb1-35"></a>}   </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>process bar {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    input<span class="sc">:</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>      path x</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>      path <span class="st">'bar.txt'</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    script<span class="sc">:</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>      <span class="st">"""</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st">      your_command $x &gt; bar.txt</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="st">      """</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>workflow {</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">=</span> <span class="fu">channel.fromPath</span>(<span class="st">'/some/path/*.txt'</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bar</span>(data)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<p>Reference https://icbi-lab.github.io/current-topics-bioinformatics-lecture/07_nextflow_dsl2.html#7</p>
+<p>Module components can be imported using the include keyword.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run . <span class="dt">\</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">-main-script</span> nf_example/test_nf_schema_input.nf <span class="dt">\</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">-c</span> nf_example/test_nf_schema_input.conf </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>include { foo } from <span class="st">'./some/module'</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>workflow {</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">=</span> <span class="fu">channel.fromPath</span>(<span class="st">'/some/data/*.txt'</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">foo</span>(data)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<p>Multiple inclusion</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>include { foo; bar } from <span class="st">'./some/module'</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>workflow {</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">=</span> <span class="fu">channel.fromPath</span>(<span class="st">'/some/data/*.txt'</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">foo</span>(data)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bar</span>(data)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Process outputs can either be assigned to a variable or accessed using the implicit <code>.out</code> attribute</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>include { INDEX; FASTQC; QUANT; MULTIQC } from <span class="st">'./module/script.nf'</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>read_pairs_ch <span class="ot">=</span> <span class="fu">channel.fromFilePairs</span>( params.reads)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>workflow {</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">INDEX</span>( params.transcriptome )</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">FASTQC</span>( read_pairs_ch )</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">QUANT</span>( INDEX.out, read_pairs_ch )</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">MULTIQC</span>( <span class="fu">QUANT.out.mix</span>(FASTQC.out)<span class="fu">.collect</span>(), multiqc_file )</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Note: channels may now be used as inputs multiple times without the need to duplicate them</p>
+<p>use the <em>emit</em> option to define a name identifier that can be used to reference the channel in the external scope.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>process foo {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">:</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    path <span class="st">'*.bam'</span>, emit<span class="sc">:</span> samples_bam</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'''</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="st">  your_command --here</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="st">  '''</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>workflow {</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">foo</span>()</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">foo.out.samples_bam.view</span>()</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>… inclusion and invocation of components with the same name from different modules</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>include { foo } from <span class="st">'./some/module'</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>include { foo as bar } from <span class="st">'./other/module'</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>workflow {</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">foo</span>(some_data)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bar</span>(other_data)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>… inclusion and the invocation of the same component multiple times</p>
+<p>#| echo: true #| eval: false include { foo as foo_a; foo as foo_b } from ‘./some/module’</p>
+<p>workflow { foo_a(some_data) foo_b(other_data) }</p>
+<pre><code>
+
+## Parameters
+
+### Parameter block
+
+Since Nextflow 25.10.0, you can define parameters in a dedicated `params` block.
+
+To enable this feature, set the environment variable `NXF_SYNTAX_PARSER` to `v2` before running Nextflow:
+
+
+::: {.cell}
+
+```{.sh .cell-code}
+export NXF_SYNTAX_PARSER=v2</code></pre>
+<p>:::</p>
+<p>Define one or more parameters in the module</p>
+<p>#| echo: true #| eval: false params.foo = ‘Hello’ params.bar = ‘world!’</p>
+<p>def sayHello() { println “$params.foo $params.bar” }</p>
 </section>
-<section id="schema-will-check-whether-the-files-exist-or-not" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="schema-will-check-whether-the-files-exist-or-not"><span class="header-section-number">9.2</span> Schema will check whether the files exist or not</h2>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run .  <span class="dt">\</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">-main-script</span> nf_example/test_nf_schema_input.nf <span class="dt">\</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">-c</span> nf_example/test_nf_schema_input.conf <span class="dt">\</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">--sample_table</span> test_data/sample_meta_FileNotExist.csv </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>With the schema setting, the files specified in <code>read1</code> and <code>read2</code> fields have to exist.</p>
-<p>If not, the error message below will be shown:</p>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>Error
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>N E X T F L O W ~ version 25.10.0</p>
-<p>Launching <code>nf_example/test_nf_schema_input.nf</code> [romantic_gutenberg] DSL2 - revision: eb82818f4d</p>
-<p>ERROR ~ Validation of samplesheet failed!</p>
-<p>– Check ‘.nextflow.log’ file for details The following errors have been detected in /mnt/ccrsf-static/Analysis/xies4/github_repos/nextflow_note/test_data/sample_meta_FileNotExist.csv:</p>
-<p>-&gt; Entry 1: Error for field ‘read2’ (/path/to/sample1_fc1_R2.fastq.gz;/path/to/sample1_fc1_R2.fastq.gz): the file or directory ‘/path/to/sample1_fc1_R2.fastq.gz;/path/to/sample1_fc1_R2.fastq.gz’ does not exist (FastQ file for reads 2 cannot contain spaces and must have extension ‘.fq.gz’ or ‘.fastq.gz’) -&gt; Entry 1: Error for field ‘read1’ (/path/to/sample1_fc1_R1.fastq.gz;/path/to/sample1_fc1_R1.fastq.gz): the file or directory ‘/path/to/sample1_fc1_R1.fastq.gz;/path/to/sample1_fc1_R1.fastq.gz’ does not exist (FastQ file for reads 1 must be provided, cannot contain spaces and must have extension ‘.fq.gz’ or ‘.fastq.gz’) -&gt; Entry 2: Error for field ‘read2’ (/path/to/sample2_fc1_R2.fastq.gz;/path/to/sample2_fc1_R2.fastq.gz): the file or directory ‘/path/to/sample2_fc1_R2.fastq.gz;/path/to/sample2_fc1_R2.fastq.gz’ does not exist (FastQ file for reads 2 cannot contain spaces and must have extension ‘.fq.gz’ or ‘.fastq.gz’) -&gt; Entry 2: Error for field ‘read1’ (/path/to/sample2_fc1_R1.fastq.gz;/path/to/sample2_fc1_R1.fastq.gz): the file or directory ‘/path/to/sample2_fc1_R1.fastq.gz;/path/to/sample2_fc1_R1.fastq.gz’ does not exist (FastQ file for reads 1 must be provided, cannot contain spaces and must have extension ‘.fq.gz’ or ‘.fastq.gz’) -&gt; Entry 3: Error for field ‘read2’ (/path/to/sample3_fc1_R2.fastq.gz;/path/to/sample3_fc1_R2.fastq.gz): the file or directory ‘/path/to/sample3_fc1_R2.fastq.gz;/path/to/sample3_fc1_R2.fastq.gz’ does not exist (FastQ file for reads 2 cannot contain spaces and must have extension ‘.fq.gz’ or ‘.fastq.gz’) -&gt; Entry 3: Error for field ‘read1’ (/path/to/sample3_fc1_R1.fastq.gz;/path/to/sample3_fc1_R1.fastq.gz): the file or directory ‘/path/to/sample3_fc1_R1.fastq.gz;/path/to/sample3_fc1_R1.fastq.gz’ does not exist (FastQ file for reads 1 must be provided, cannot contain spaces and must have extension ‘.fq.gz’ or ‘.fastq.gz’)</p>
-</div>
-</div>
+<section id="sub-workflows" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="sub-workflows"><span class="header-section-number">10.2</span> sub-workflows</h2>
 </section>
-<section id="transform-samplesheet-in-csv-to-structured-nextflow-channell" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="transform-samplesheet-in-csv-to-structured-nextflow-channell"><span class="header-section-number">9.3</span> Transform samplesheet in CSV to structured NextFlow channell</h2>
-<p>In the code above, a plain Groovy list is returned.</p>
-<p>The code below uses explicit <code>tuple()</code> constructor - the canonical DSL 2 form, making it unambiguous and self-documenting.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>nextflow.enable.dsl<span class="ot">=</span><span class="dv">2</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="sc">/</span><span class="er">*</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a>  Standardize input reads from a samplesheet using nf<span class="sc">-</span>schema helper.</span>
-<span id="cb4-5"><a href="#cb4-5"></a></span>
-<span id="cb4-6"><a href="#cb4-6"></a>  Emits<span class="sc">:</span> samples_ch → <span class="fu">tuple</span>(id, meta_map, reads_list)</span>
-<span id="cb4-7"><a href="#cb4-7"></a>          <span class="sc">-</span> id<span class="sc">:</span>     sample <span class="fu">identifier</span> (string)</span>
-<span id="cb4-8"><a href="#cb4-8"></a>          <span class="sc">-</span> meta<span class="sc">:</span>   map including <span class="st">`</span><span class="at">single_end: true|false</span><span class="st">`</span> plus original fields</span>
-<span id="cb4-9"><a href="#cb4-9"></a>          <span class="sc">-</span> reads<span class="sc">:</span>  [read1] <span class="cf">for</span> SE, [read1, read2] <span class="cf">for</span> PE</span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="sc">*</span><span class="er">/</span></span>
-<span id="cb4-11"><a href="#cb4-11"></a></span>
-<span id="cb4-12"><a href="#cb4-12"></a>params.sample_table <span class="ot">=</span> <span class="fu">file</span>(<span class="st">'test_data/sample_meta_simple.csv'</span>)</span>
-<span id="cb4-13"><a href="#cb4-13"></a></span>
-<span id="cb4-14"><a href="#cb4-14"></a><span class="sc">/</span><span class="er">/</span> Helper that turns a samplesheet into a list of [meta, read1, read2?]</span>
-<span id="cb4-15"><a href="#cb4-15"></a>include { samplesheetToList } from <span class="st">'plugin/nf-schema'</span></span>
-<span id="cb4-16"><a href="#cb4-16"></a></span>
-<span id="cb4-17"><a href="#cb4-17"></a>workflow {</span>
-<span id="cb4-18"><a href="#cb4-18"></a></span>
-<span id="cb4-19"><a href="#cb4-19"></a>  main<span class="sc">:</span></span>
-<span id="cb4-20"><a href="#cb4-20"></a>    Channel</span>
-<span id="cb4-21"><a href="#cb4-21"></a>      <span class="fu">.fromList</span>( <span class="fu">samplesheetToList</span>(params.sample_table, <span class="st">"${projectDir}/assets/schema_input.json"</span>) )</span>
-<span id="cb4-22"><a href="#cb4-22"></a>      .map { meta, read1, read2 <span class="ot">-&gt;</span></span>
-<span id="cb4-23"><a href="#cb4-23"></a>        def isSE <span class="ot">=</span> <span class="sc">!</span>read2</span>
-<span id="cb4-24"><a href="#cb4-24"></a>        <span class="fu">tuple</span>(</span>
-<span id="cb4-25"><a href="#cb4-25"></a>          meta.id as String,</span>
-<span id="cb4-26"><a href="#cb4-26"></a>          meta <span class="sc">+</span> [ single_end<span class="sc">:</span> isSE ],</span>
-<span id="cb4-27"><a href="#cb4-27"></a>          isSE ? [ read1 ] <span class="sc">:</span> [ read1, read2 ]</span>
-<span id="cb4-28"><a href="#cb4-28"></a>        )</span>
-<span id="cb4-29"><a href="#cb4-29"></a>      }</span>
-<span id="cb4-30"><a href="#cb4-30"></a>      .set { samples_ch }</span>
-<span id="cb4-31"><a href="#cb4-31"></a></span>
-<span id="cb4-32"><a href="#cb4-32"></a>    <span class="sc">/</span><span class="er">/</span> Optional<span class="sc">:</span> inspect the standardized tuples during development</span>
-<span id="cb4-33"><a href="#cb4-33"></a>    samples_ch.view { it }</span>
-<span id="cb4-34"><a href="#cb4-34"></a></span>
-<span id="cb4-35"><a href="#cb4-35"></a>    <span class="sc">/</span><span class="er">/</span> Also log the channel <span class="fu">object</span> (structure, not contents)</span>
-<span id="cb4-36"><a href="#cb4-36"></a>    log.info <span class="st">"Sample channel created: ${samples_ch}"</span></span>
-<span id="cb4-37"><a href="#cb4-37"></a>    println <span class="st">"The Groovy object type of 'samples_ch' is: ${samples_ch.getClass()}</span><span class="sc">\n</span><span class="st">"</span></span>
-<span id="cb4-38"><a href="#cb4-38"></a></span>
-<span id="cb4-39"><a href="#cb4-39"></a>    samples_ch.subscribe { item <span class="ot">-&gt;</span></span>
-<span id="cb4-40"><a href="#cb4-40"></a>      println <span class="st">"Type: ${item.getClass()} | Value: ${item}"</span></span>
-<span id="cb4-41"><a href="#cb4-41"></a>    }</span>
-<span id="cb4-42"><a href="#cb4-42"></a></span>
-<span id="cb4-43"><a href="#cb4-43"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>This is the standard tuple structure most downstream modules in DSL2 workflows (e.g.&nbsp;nf-core) expect.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">tuple</span>(id, meta_map, reads_list)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Explicit tuples make your workflow compatible with DSL 2 modules, where inputs are declared like:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>input<span class="sc">:</span> </span>
-<span id="cb6-2"><a href="#cb6-2"></a>tuple <span class="fu">val</span>(id), <span class="fu">val</span>(meta), <span class="fu">path</span>(reads)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>The code below collapses the <code>if/else</code> block into a one-liner ternary operator. The variable <code>isSE</code> stores the boolean.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>def isSE <span class="ot">=</span> <span class="sc">!</span>read2</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">tuple</span>(</span>
-<span id="cb7-3"><a href="#cb7-3"></a>  meta.id as String,</span>
-<span id="cb7-4"><a href="#cb7-4"></a>  meta <span class="sc">+</span> [ single_end<span class="sc">:</span> isSE ],</span>
-<span id="cb7-5"><a href="#cb7-5"></a>  isSE ? [ read1 ] <span class="sc">:</span> [ read1, read2 ]</span>
-<span id="cb7-6"><a href="#cb7-6"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>This style makes your mapping functional and side-effect-free, which aligns better with how Nextflow channels are transformed. It’s also easier to maintain if you later expand the tuple (e.g., add another metadata field).</p>
+<section id="workflow" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="workflow"><span class="header-section-number">10.3</span> workflow</h2>
+<p>Workflows defined in your script or imported by a module inclusion can be invoked and composed as any other process in your application.</p>
 
 
 </section>
@@ -816,11 +842,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./03-results.html" class="pagination-link" aria-label="Test 3">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Test 3</span></span>
+      <a href="./nf_channels_processes.html" class="pagination-link" aria-label="Channel and Process">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Channel and Process</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./nf_workflow.html" class="pagination-link" aria-label="Workflows in Nextflow">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Workflows in Nextflow</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
